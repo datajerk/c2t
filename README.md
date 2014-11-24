@@ -1,31 +1,65 @@
-# c2t Documentation
+## Introduction
 
-
-## AUTHOR
-
-Egan Ford (egan@sense.net, datajerk@gmail.com)
-
-
-## DESCRIPTION
-
-`c2t` is a command line tool that can convert binary code/data and/or  Apple-1/II Monitor text, as well as 140K disk images, into audio files suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
+`c2t` is a command line tool that can convert binary code/data and/or Apple-1/II Monitor text, as well as 140K disk images, into audio files suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
 
 `c2t` offers three high-speed options for the 64K Apple II+ and Apple //e: 8000 bps, 8820 bps, and 9600 bps.  The c2t compression option may be used to speedup the delivery of data with all three as well as the native 1333 bps cassette interface ROM routines.
 
 8820 bps (used to burn CDs) and 9600 bps are not compatible with all II+s and //es.  If you plan to distribute your audio files, then use 8000 bps.  8820 bps and 1333 bps is not an option for disk images.
 
-High-speed and compress options require c2t's custom loader, and at this time that limits you to a single segment.  You can overcome this limitation by concatenating all your code together and creating your own code to shuffle your data around, or, pad each segment with enough zeros to align 
-subsequent segments with their target address and then use the compress option to minimize this overhead.
+High-speed and compression options require c2t's custom loader, and at this time that limits you to a single segment.  You can overcome this limitation by concatenating all your code together and creating your own code to shuffle your data around, or, pad each segment with enough zeros to align  subsequent segments with their target address and then use the compress option to minimize this overhead.
 
 Multi-segment audio files can be created for the Apple-1, II, II+, and //e that can be loaded using the standard cassette interface ROM routines.
 
+Examples of `c2t` in action:
 
-## WHY?
+- <http://asciiexpress.net/gameserver/readme.html>
+- <http://asciiexpress.net/diskserver/readme.html>
 
-I created this because I needed a convenient way to get data loaded into my //e without dragging my computer out of my office (2nd floor) to my man cave (basement).  IOW, I needed an iPhone/iPad/mobile solution.  That, and CFFA3000 was sold out.
+
+## Why?
+
+I created this because I needed a convenient way to get data loaded into my //e without dragging my computer out of my office (2nd floor) to my man cave (basement).  IOW, I needed an iPhone/iPad/mobile solution.  That, and CFFA3000 was sold out--at the time.
 
 
-## SYNOPSIS
+## Yeah, but why?
+
+You clearly do not understand the awesomeness of the Apple II, move along.
+
+
+## Installation
+
+```
+git clone https://github.com/datajerk/c2t.git
+```
+
+*or*
+
+Download <https://github.com/datajerk/c2t/archive/master.zip> and extract.
+
+Both the archive and the repo contain an OS/X binary (`c2t`) as well as a Windows binary (`windows/c2t.exe`).  Just copy to the to any directory in your path.  OS/X users may need to adjust the permissions, e.g.:
+```
+cp c2t /usr/local/bin
+chmod 755 /usr/local/bin/c2t
+```
+
+To build from the source (OS/X and Linux):
+```
+make clean
+make
+```
+
+To build for/from Windows, first install MinGW (<http://www.mingw.org/>), then type from the root of this distribution:
+```
+PATH=C:\MinGW\bin;%PATH%
+cd windows
+copy ..\c2t.*
+copy ..\fake6502.h
+gcc -Wall -O3 -static -o c2t c2t.c
+```
+> Use the `miniz.h` in the `windows` directory.
+
+
+## Synopsis
 
 Output of `c2t -h`:
 ```
