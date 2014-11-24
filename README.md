@@ -1,49 +1,34 @@
-c2t Documentation
+# c2t Documentation
 
 
-AUTHOR
+## AUTHOR
 
 Egan Ford (egan@sense.net, datajerk@gmail.com)
 
 
-DESCRIPTION
+## DESCRIPTION
 
-c2t is a command line tool that can convert binary code/data and/or 
-Apple-1/II Monitor text, as well as 140K disk images, into audio files
-suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
+`c2t` is a command line tool that can convert binary code/data and/or  Apple-1/II Monitor text, as well as 140K disk images, into audio files suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
 
-c2t offers three high-speed options for the 64K Apple II+ and Apple //e:  
-8000 bps, 8820 bps, and 9600 bps.  The c2t compression option may be used to
-speedup the delivery of data with all three as well as the native 1333 bps
-cassette interface ROM routines.
+`c2t` offers three high-speed options for the 64K Apple II+ and Apple //e: 8000 bps, 8820 bps, and 9600 bps.  The c2t compression option may be used to speedup the delivery of data with all three as well as the native 1333 bps cassette interface ROM routines.
 
-8820 bps (used to burn CDs) and 9600 bps are not compatible with all II+s 
-and //es.  If you plan to distribute your audio files, then use 8000 bps.  
-8820 bps and 1333 bps is not an option for disk images.
+8820 bps (used to burn CDs) and 9600 bps are not compatible with all II+s and //es.  If you plan to distribute your audio files, then use 8000 bps.  8820 bps and 1333 bps is not an option for disk images.
 
-High-speed and compress options require c2t's custom loader, and at this 
-time that limits you to a single segment.  You can overcome this limitation 
-by concatenating all your code together and creating your own code to 
-shuffle your data around, or, pad each segment with enough zeros to align 
-subsequent segments with their target address and then use the compress 
-option to minimize this overhead.
+High-speed and compress options require c2t's custom loader, and at this time that limits you to a single segment.  You can overcome this limitation by concatenating all your code together and creating your own code to shuffle your data around, or, pad each segment with enough zeros to align 
+subsequent segments with their target address and then use the compress option to minimize this overhead.
 
-Multi-segment audio files can be created for the Apple-1, II, II+, and //e 
-that can be loaded using the standard cassette interface ROM routines.
+Multi-segment audio files can be created for the Apple-1, II, II+, and //e that can be loaded using the standard cassette interface ROM routines.
 
 
-WHY?
+## WHY?
 
-I created this because I needed a convenient way to get data loaded into my
-//e without dragging my computer out of my office (2nd floor) to my mancave
-(basement).  IOW, I needed an iPhone/iPad/mobile solution.  That, and
-CFFA3000 was sold out.
+I created this because I needed a convenient way to get data loaded into my //e without dragging my computer out of my office (2nd floor) to my man cave (basement).  IOW, I needed an iPhone/iPad/mobile solution.  That, and CFFA3000 was sold out.
 
 
-SYNOPSIS
+## SYNOPSIS
 
-Output of "c2t -h":
-
+Output of `c2t -h`:
+```
 usage:  c2t      [-vh?]
         c2t      [-elp]         input[.mon],[addr] ... [output.mon]
         c2t {-1} [-cepr]        input[.mon],[addr] ... [output.[aif[f]|wav[e]]]
@@ -85,12 +70,12 @@ input(s) with a .mon extension expected input format:
 A single input with a .dsk extension expected to be a 140K disk image.
 
 output must have aiff, aif, wav, wave, or mon extention.
+```
 
-
-EXAMPLES
+## EXAMPLES
 
 ------------------------------------------------------------------------------
-
+```
 Input:  Apple 1 monitor file with two segments.  First 4 lines:
 
 0: 00 05 00 10 00 00 00 00
@@ -113,9 +98,9 @@ To load up and run on your Apple I, type:
 
         C100R
         0.FR 280.3A1R 
-
+```
 ------------------------------------------------------------------------------
-
+```
 Input:  cc65/ca65 Apple II binary with DOS 4-byte header.  The DOS header
         contains the starting address of the program.
 
@@ -134,9 +119,9 @@ To load up and run on your Apple II, type:
         CALL -151
         803.1390R 
         803G
-
+```
 ------------------------------------------------------------------------------
-
+```
 Input:  cc65/ca65 Apple II binary with DOS 4-byte header.  The DOS header
         contains the starting address of the program.
 
@@ -156,9 +141,9 @@ Example hello.mon output:
 0808: C0 2C 81 C0 A9 91 A0 13
 0810: 85 9B 84 9C A9 91 A0 13
 0818: 85 96 84 97 A9 00 A0 D4
-
+```
 ------------------------------------------------------------------------------
-
+```
 Input:  Binary game without DOS header that should be loaded at $801.
 
 Command:
@@ -176,9 +161,9 @@ To load up and run on your Apple II, type:
         CALL -151
         801.501CR 
         801G
-
+```
 ------------------------------------------------------------------------------
-
+```
 Input:  Binary game without DOS header that should be loaded at $801 as fast
         as possible while being compatible with all Apple IIs.
 
@@ -198,9 +183,9 @@ To load up and run on your Apple II, type:
         LOAD
 
 NOTE:  Compression was disabled because it didn't help.
-
+```
 ------------------------------------------------------------------------------
-
+```
 Input:  Binary game without DOS header that should be loaded at $800 as fast
         as possible while being compatible with all Apple IIs.
 
@@ -217,9 +202,9 @@ start: 0x886C, length: 12691, deflated: 58.69%, data time:13.25, inflate time:5.
 To load up and run on your Apple II, type:
 
         LOAD
-
+```
 ------------------------------------------------------------------------------
-
+```
 Input:  Three binary files to be loaded at three different addresses.
 
 c2t -2 foo,801 foo.obj,3ffd foo.pic,2000 foo.aif
@@ -234,9 +219,9 @@ To load up and run on your Apple II, type:
 
         CALL -151
         801.85BR 3FFD.89FFR 2000.3FFFR 
-
+```
 ------------------------------------------------------------------------------
-
+```
 Input:  DOS 3.3 140K diskette image to be loaded with maximum II
         compatibility.  Disk will be formatted first.
 
@@ -263,5 +248,5 @@ Segment: 4, start: 0x6DE6, length:  8729, deflated: 69.56%, data time:9, inflate
 To load up and run on your Apple II, type:
 
         LOAD
-
+```
 ------------------------------------------------------------------------------
