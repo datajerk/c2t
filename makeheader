@@ -1,0 +1,53 @@
+#!/bin/bash
+
+header()
+{
+	FILE=$1
+	VAR=$2
+	EOL=$3
+	BYTES=$(hexdump -v $FILE | sed 's/^.......//' | wc -w | awk '{print $1}');
+
+	echo "/*"
+	expand ${FILE}.s
+	echo "*/"
+
+	printf "unsigned char $VAR[] = {\n\t"
+	
+	for i in $(hexdump -v $FILE | sed 's/^.......//');
+	do
+		printf "0x%02X" 0x$i
+		BYTES=$((BYTES - 1))
+		if ((BYTES != 0))
+		then
+			printf ","
+		fi
+		EOL=$((EOL - 1))
+		if ((EOL == 0))
+		then
+			EOL=8
+			printf "\n\t"
+		fi
+	done
+
+	printf "\n};\n"
+}
+
+cd asm
+make clean
+make
+
+(
+header autoload autoloadcode 4
+header inflate inflatecode 8
+header fastload9600 fastload9600 4
+header fastload8000 fastload8000 4
+header fastloadcd fastloadcd 4
+header diskload9600 diskload9600 4
+header diskload8000 diskload8000 4
+header diskload2 diskloadcode2 8
+header diskload3 diskloadcode3 8
+) > ../c2t.h.1
+
+cd ..
+
+cat c2t.h.[012] > c2t.h

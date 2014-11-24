@@ -1,0 +1,72 @@
+
+const char *usagetext="\n\
+usage:  c2t      [-vh?]\n\
+        c2t      [-elp]         input[.mon],[addr] ... [output.mon]\n\
+        c2t {-1} [-cepr]        input[.mon],[addr] ... [output.[aif[f]|wav[e]]]\n\
+        c2t {-2} [-abcdef8pmqr] input[.mon],[addr] ... [output.[aif[f]|wav[e]]]\n\
+        c2t      [-n8]          input.dsk          ... [output.[aif[f]|wav[e]]]\n\
+\n\
+        -1 or -2 for Apple I or II tape format\n\
+        -8 use 48k/8bit 8000 bps transfer (Apple II/II+/IIe 64K only)\n\
+           Implies -2a.  Negates -f and -d.\n\
+        -a assembly autoload and run (Apple II/II+/IIe 64K only)\n\
+        -b basic autoload and run (Apple II+/IIe 64K only)\n\
+           Implies -2a.\n\
+        -c compress data\n\
+        -d use fast 44.1k/16bit transfer (Apple II/II+/IIe 64K only)\n\
+           Implies -2a.  Negates -f and -8.  Use for burning CDs.\n\
+        -e pad with $00 to end on page boundary\n\
+        -f use faster 48k/8bit (9600 bps) transfer (Apple II/II+/IIe 64K only)\n\
+           Implies -2a.  Negates -8 and -d.  Unreliable on some systems.\n\
+        -h|? this help\n\
+        -l long monitor format (24 bytes/line)\n\
+        -m jump to monitor after autoload\n\
+        -n do not format disks\n\
+        -p pipe to stdout\n\
+        -q parameters and data only (for use with custom client)\n\
+        -r #, where # overrides the sample rate (e.g. -r 48000)\n\
+           Negates -a, -b, -8, -q, -f, and -d\n\
+        -t 10 second preamble (default 4) for real tape use\n\
+        -v print version number and exit\n\
+\n\
+input(s) without a .mon or .dsk extension is assumed to be a binary with a 4\n\
+byte header.  If the header is missing then you must append ,load_address to\n\
+each binary input missing a header, e.g. filename,800.  The load address\n\
+will be read as hex.\n\
+\n\
+input(s) with a .mon extension expected input format:\n\
+\n\
+        0280: A2 FF 9A 20 8C 02 20 4F\n\
+        0288: 03 4C 00 FF 20 9E 02 A9\n\
+\n\
+A single input with a .dsk extension expected to be a 140K disk image.\n\
+\n\
+output must have aiff, aif, wav, wave, or mon extention.\n\
+\n\
+Examples:\n\
+\n\
+        c2t hello hello.mon\n\
+        c2t -p hello.mon print.mon foo,800 | pbcopy\n\
+        c2t -2f moon.patrol,801 moon.patrol.aif\n\
+        c2t -2 hello,300 hello.aiff\n\
+        c2t -1 hello.mon hello.wav\n\
+        c2t -2 thief,801 thief.obj,3ffd thief.pic,2000 theif.aif\n\
+        c2t foo.dsk foo.wav\n\
+\n\
+";
+
+//51 00 D5, 3 byte header, LENGTH LSB/MSB, D5 for autorun
+unsigned char header[] = {0x00,0x00,0xD5};
+
+
+/*
+basic program "CALL 2060", 801.80B
+
+end of code[LSB,MSB] = 0x0B,0x08
+line #[LSB,MSG] = 0x01,0x00
+CALL[1] = 0x8C
+vec[4] = 0x32,0x30,0x36,0x30 (2060 in ASCII)
+end[2] = 0x00,0x00
+*/
+unsigned char basic[] = {0x0B,0x08,0x01,0x00,0x8C,0x32,0x30,0x36,0x30,0x00,0x00};
+
