@@ -56,7 +56,7 @@ cat <<EOF >c2t.h.2
 unsigned char dosboot1[] = {
 EOF
 
-cat dos33.boot1.mon | \
+cat mon/dos33.boot1.mon | \
 	perl -pi -e 's/ /,0x/g' | \
 	perl -pi -e 's/$/,/' | \
 	perl -pi -e 's/^....../\t/' >>c2t.h.2
@@ -68,7 +68,7 @@ cat <<EOF >>c2t.h.2
 unsigned char dosboot2[] = {
 EOF
 
-cat dos33.boot2.mon | \
+cat mon/dos33.boot2.mon | \
 	perl -pi -e 's/ /,0x/g' | \
 	perl -pi -e 's/$/,/' | \
 	perl -pi -e 's/^....../\t/' >>c2t.h.2
