@@ -50,4 +50,29 @@ header diskload3 diskloadcode3 8
 
 cd ..
 
+cat <<EOF >c2t.h.2
+
+//DOS 3.3
+unsigned char dosboot1[] = {
+EOF
+
+cat dos33.boot1.mon | \
+	perl -pi -e 's/ /,0x/g' | \
+	perl -pi -e 's/$/,/' | \
+	perl -pi -e 's/^....../\t/' >>c2t.h.2
+
+cat <<EOF >>c2t.h.2
+};
+
+//DOS 3.3
+unsigned char dosboot2[] = {
+EOF
+
+cat dos33.boot2.mon | \
+	perl -pi -e 's/ /,0x/g' | \
+	perl -pi -e 's/$/,/' | \
+	perl -pi -e 's/^....../\t/' >>c2t.h.2
+
+echo "};" >>c2t.h.2
+
 cat c2t.h.[012] > c2t.h
