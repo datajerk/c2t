@@ -67,16 +67,16 @@ gcc -Wall -O3 -static -o c2t c2t.c
 ## Tested Configurations:
 
 * Apple //e
-	* disk ][ verified (format and no-format)
+	* Apple disk ][ verified (format and no-format)
 	* Apple duodisk verified (format and no-format)
 	* CFFA3000 3.1 verified with USB stick (no-format only)
 	* CFFA3000 3.1 failed with IBM 4GB Microdrive (too slow)
 	* Nishida Radio SDISK // (no-format only)
 * Apple II+
-	* disk ][ verified (format and no-format)
+	* Apple disk ][ verified (format and no-format)
 	* Nishida Radio SDISK // (no-format only)
 * Virtual ][ Emulator
-	* disk ][ verified (format and no-format)
+	* Apple disk ][ verified (format and no-format)
 
 
 ## Synopsis
