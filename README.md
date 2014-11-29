@@ -16,14 +16,19 @@ Examples of `c2t` in action:
 - <http://asciiexpress.net/diskserver/readme.html>
 
 
-## Why?
+### Why?
 
 I created this because I needed a convenient way to get data loaded into my //e without dragging my computer out of my office (2nd floor) to my man cave (basement).  IOW, I needed an iPhone/iPad/mobile solution.  That, and CFFA3000 was sold out--at the time.
 
 
-## Yeah, but why?
+#### Yeah, but why?
 
 You clearly do not understand the awesomeness of the Apple II, move along.
+
+
+## Version
+
+0.996 (Nov 29 2014)
 
 
 ## Installation
@@ -57,6 +62,21 @@ copy ..\fake6502.h
 gcc -Wall -O3 -static -o c2t c2t.c
 ```
 > Use the `miniz.h` in the `windows` directory.
+
+
+## Tested Configurations:
+
+* Apple //e
+	* disk ][ verified (format and no-format)
+	* Apple duodisk verified (format and no-format)
+	* CFFA3000 3.1 verified with USB stick (no-format only)
+	* CFFA3000 3.1 failed with IBM 4GB Microdrive (too slow)
+	* Nishida Radio SDISK // (no-format only)
+* Apple II+
+	* disk ][ verified (format and no-format)
+	* Nishida Radio SDISK // (no-format only)
+* Virtual ][ Emulator
+	* disk ][ verified (format and no-format)
 
 
 ## Synopsis

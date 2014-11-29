@@ -81,7 +81,7 @@ Bugs:
 
 #define ABS(x) (((x) < 0) ? -(x) : (x))
 
-#define VERSION "Version 0.995"
+#define VERSION "Version 0.996"
 #define OUTFILE argv[argc-1]
 #define BINARY 0
 #define MONITOR 1
@@ -1277,7 +1277,16 @@ int main(int argc, char **argv)
 			}
 			else {
 				//j = 6 + ceil(inflate_times[i-1]);  // 6 = write track time, may need to make it 7
+				// disk ][ verified (format and no-format)
+				// Virtual ][ emulator verified (format and no-format, 8K only)
+				// CFFA3000 3.1 failed, needs more time
+
 				j = ceil(6.5 + inflate_times[i-1]);  // 6 = write track time, may need to make it 7
+				// disk ][ verified (format and no-format)
+				// Apple duodisk verified (format and no-format)
+				// CFFA3000 3.1 verified with USB stick (no-format only)
+				// CFFA3000 3.1 failed with IBM 4GB Microdrive (too slow)
+				// Nishida Radio SDISK // (no-format only)
 			}
 			if(i==1) // seek time for track 0, just in case
 				j+=2;
