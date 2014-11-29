@@ -70,11 +70,11 @@ gcc -Wall -O3 -static -o c2t c2t.c
 	* Apple disk ][ verified (format and no-format)
 	* Apple duodisk verified (format and no-format)
 	* CFFA3000 3.1 verified with USB stick (no-format only)
-	* CFFA3000 3.1 failed with IBM 4GB Microdrive (too slow)
-	* Nishida Radio SDISK // (no-format only)
+	* CFFA3000 3.1 *failed* with IBM 4GB Microdrive (too slow)
+	* Nishida Radio SDISK // verified (no-format only)
 * Apple II+
 	* Apple disk ][ verified (format and no-format)
-	* Nishida Radio SDISK // (no-format only)
+	* Nishida Radio SDISK // verified (no-format only)
 * Virtual ][ Emulator
 	* Apple disk ][ verified (format and no-format)
 
