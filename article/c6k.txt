@@ -1,0 +1,49 @@
+6000
+6000
+-2
+2  main: ldy #0
+4 psync: bit tapein
+2        bmi psync
+2 ploop: iny
+4        bit tapein
+3        bpl ploop
+2 ploop: iny
+4        bit tapein
+3        bpl ploop
+2 ploop: iny
+4        bit tapein
+3        bpl ploop
+2 ploop: iny
+4        bit tapein
+3        bpl ploop
+2 ploop: iny
+4        bit tapein
+3        bpl ploop
+2 ploop: iny
+4        bit tapein
+3        bpl ploop
+2 ploop: iny
+4        bit tapein
+3        bpl ploop
+2 ploop: iny
+4        bit tapein
+3        bpl ploop
+2 ploop: iny
+4        bit tapein
+3        bpl ploop
+2 ploop: iny
+4        bit tapein
+2        bpl ploop
+2        cpy #$40 
+2        bpl endcode
+2        cpy #$15
+2        bpl main
+2        cpy #$07
+7 store: rol nnnn,x
+2        asl
+3        bne main
+2        lda #1
+2        inx
+3        bne main
+6        inc store+2
+3        jmp main

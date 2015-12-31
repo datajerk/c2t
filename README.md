@@ -28,7 +28,8 @@ You clearly do not understand the awesomeness of the Apple II, move along.
 
 ## Version
 
-0.996 (Nov 29 2014)
+c2t 0.996 (Nov 29 2014)
+c2t-96h 0.997 (Dec 31 2015)
 
 
 ## Installation
@@ -62,6 +63,22 @@ copy ..\fake6502.h
 gcc -Wall -O3 -static -o c2t c2t.c
 ```
 > Use the `miniz.h` in the `windows` directory.
+
+To cross build for Windows from OS/X, first install <http://crossgcc.rts-software.org/doku.php?id=compiling_for_win32>, then type:
+```
+cd windows
+cp ../c2t.*
+cp ../fake6502.h
+/usr/local/gcc-4.8.0-qt-4.8.4-for-mingw32/win32-gcc/bin/i586-mingw32-gcc -Wall -Wno-unused-value -Wno-unused-function -O3 -static -o c2t.exe c2t.c
+```
+
+
+## c2t-96h Version
+
+`c2t-96h` is a hacked up version of `c2t` that fixes a few bugs (e.g. `.po` files) and adds working 9600 BPS code.
+Both `-8` and `-f` activate this new 9600 BPS code.
+
+`c2t-96h` will eventually replace `c2t`.  IOW, use `c2t-96h` for now.
 
 
 ## Tested Configurations:
