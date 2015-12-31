@@ -28,8 +28,8 @@ You clearly do not understand the awesomeness of the Apple II, move along.
 
 ## Version
 
-c2t 0.996 (Nov 29 2014)
-c2t-96h 0.997 (Dec 31 2015)
+* c2t 0.996 (Nov 29 2014)
+* c2t-96h 0.997 (Dec 31 2015)
 
 
 ## Installation
