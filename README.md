@@ -144,7 +144,7 @@ A single input with a .dsk extension expected to be a 140K disk image.
 output must have aiff, aif, wav, wave, or mon extention.
 ```
 
-## EXAMPLES
+## Examples
 
 ------------------------------------------------------------------------------
 ```
