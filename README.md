@@ -1,3 +1,5 @@
+## Use c2t-96h version, see below
+
 ## Introduction
 
 `c2t` is a command line tool that can convert binary code/data and/or Apple-1/II Monitor text, as well as 140K disk images, into audio files suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
@@ -75,8 +77,7 @@ cp ../fake6502.h
 
 ## c2t-96h Version
 
-`c2t-96h` is a hacked up version of `c2t` that fixes a few bugs (e.g. `.po` files) and adds working 9600 BPS code.
-Both `-8` and `-f` activate this new 9600 BPS code.
+`c2t-96h` is a hacked up version of `c2t` that fixes a few bugs (e.g. `.po` files) and adds better universal (should work on all Apple IIs) 9600 BPS code.  Both `-8` and `-f` activate this new 9600 BPS code.
 
 `c2t-96h` will eventually replace `c2t`.  IOW, use `c2t-96h` for now.
 
