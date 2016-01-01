@@ -47,7 +47,7 @@ phase1:
 	jsr	readtape	; get the code
 	jmp	$9700		; run it
 loadm:
-	.byte	"LOADING INSTA-DI8K, ETA "
+	.byte	"LOADING INSTA-DISK, ETA "
 loadsec:			; 10 bytes for "XX SEC. ",$00
 	.byte	0,0,0,0,0,0,0,0,0,0
 moved:
