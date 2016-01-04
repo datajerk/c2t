@@ -465,6 +465,7 @@ int main(int argc, char **argv)
 
 	if(dsk) {
 		fast=autoload=cd=tape=0;
+		k8=1;
 		model=2;
 
 		if(numseg != 5) {
