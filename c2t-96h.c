@@ -70,14 +70,14 @@ Bugs:
 */
 
 #include "miniz.h"
-#include "fake6502.h"
+#include <fake6502.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
-#include "c2t.h"
+#include <c2t.h>
 
 #define ABS(x) (((x) < 0) ? -(x) : (x))
 
