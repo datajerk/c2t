@@ -12,7 +12,6 @@ on run argv
 		set theMachine to (make new AppleIIe)
 		tell theMachine
 			set speaker volume to 0.25
-			#insert my_path & "test.dsk" into device "S6D1"
 			insert my_path & my_test into device "S6D1"
 			-- Now wait for the startup screen
 			delay 0.5
@@ -27,19 +26,15 @@ on run argv
 			-- Set the speed to maximum, to go quickly through the startup phase.
 			set speed to maximum
 
-			-- with timeout of 180 seconds
-			--	waiting until the last word of the last line of the compact screen text = "REBOOT"
-			-- end timeout
-
-			-- with timeout of 180 seconds
-			-- 	waiting until the last line of the compact screen text = "DONE. PRESS [RETURN] TO REBOOT."
-			-- end timeout
-
-			-- use timeout code
-
-			repeat until the last line of the compact screen text = "DONE. PRESS [RETURN] TO REBOOT."
-				delay 0.5
-			end repeat
+			try
+				with timeout of 5 seconds
+					repeat until the last line of the compact screen text = "DONE. PRESS [RETURN] TO REBOOT."
+					 	delay 0.5
+				 	end repeat
+				end timeout
+			on error
+				do shell script "echo timeout"
+			end try
 
 			-- short test of image, not necessary, next 3 lines can be removed
 			-- delay 0.5

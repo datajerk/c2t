@@ -8,7 +8,7 @@ dsk_test()
 
 	dd if=/dev/zero of=test.$FILETYPE bs=1k count=140 >/dev/null 2>&1
 
-	./c2t-96h ${BASENAME} test.aif
+	#./c2t-96h ${BASENAME} test.aif
 
 	osascript test.scrp test.${FILETYPE}
 
@@ -25,15 +25,25 @@ dsk_test()
 	return 1
 }
 
+PATH=~/wine/bin:$PATH
+
+CMD=("./c2t-96h" "wine windows/c2t-96h")
+
 for i in zork.dsk dangerous_dave.po
 do
-	if dsk_test $i
-	then
-		echo "$i passed"
-	else
-		echo "$i failed"
-		exit 1
-	fi
+	for j in $(seq 0 $(( ${#CMD[@]} - 1 )) )
+	do 
+		echo ${CMD[$j]} $i test.aif
+		eval ${CMD[$j]} $i test.aif
+		if dsk_test $i
+		then
+			echo "$i passed"
+			echo
+		else
+			echo "$i failed"
+			exit 1
+		fi
+	done
 done
 
 exit 0
