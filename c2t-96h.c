@@ -1849,8 +1849,8 @@ void printevents(event *events, int rate)
 {
 	int i;
 
-	printf("Play List:\n\n");
+	fprintf(stderr,"Play List:\n\n");
 	for(i=0;i<eventnumber;i++)
-		printf("%06.02f\t%s\n",events[i].timestamp/(float)rate,events[i].label);
-	printf("\n");
+		fprintf(stderr,"%06.02f\t%s\n",events[i].timestamp/(float)rate,events[i].label);
+	fprintf(stderr,"\n");
 }

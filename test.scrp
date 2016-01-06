@@ -1,0 +1,53 @@
+on run argv
+
+	set my_path to (system attribute "PWD") & "/"
+	set my_test to item 1 of argv
+
+	tell application "Virtual ]["
+		activate
+		delay 0.5
+		-- Close all open machines
+		close every machine saving no
+		-- Create a standard Apple //els 
+		set theMachine to (make new AppleIIe)
+		tell theMachine
+			set speaker volume to 0.25
+			#insert my_path & "test.dsk" into device "S6D1"
+			insert my_path & my_test into device "S6D1"
+			-- Now wait for the startup screen
+			delay 0.5
+			reset
+	
+			repeat until the last line of the compact screen text = "]"
+				delay 0.5
+			end repeat
+
+			type line "LOAD"
+			play my_path & "test.aif" on device "cassette recorder"
+			-- Set the speed to maximum, to go quickly through the startup phase.
+			set speed to maximum
+
+			-- with timeout of 180 seconds
+			--	waiting until the last word of the last line of the compact screen text = "REBOOT"
+			-- end timeout
+
+			-- with timeout of 180 seconds
+			-- 	waiting until the last line of the compact screen text = "DONE. PRESS [RETURN] TO REBOOT."
+			-- end timeout
+
+			-- use timeout code
+
+			repeat until the last line of the compact screen text = "DONE. PRESS [RETURN] TO REBOOT."
+				delay 0.5
+			end repeat
+
+			-- short test of image, not necessary, next 3 lines can be removed
+			-- delay 0.5
+			-- type line ""
+			-- delay 3
+
+		end tell
+		close every machine saving no
+		quit
+	end tell
+end run
