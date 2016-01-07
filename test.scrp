@@ -11,6 +11,8 @@ on run argv
 		-- Create a standard Apple //els 
 		set theMachine to (make new AppleIIe)
 		tell theMachine
+			-- Change to a color screen
+			-- set monochrome screen to false
 			set speaker volume to 0.25
 			insert my_path & my_test into device "S6D1"
 			-- Now wait for the startup screen
@@ -23,17 +25,17 @@ on run argv
 
 			type line "LOAD"
 			play my_path & "test.aif" on device "cassette recorder"
-			-- Set the speed to maximum, to go quickly through the startup phase.
 			set speed to maximum
 
 			try
-				with timeout of 5 seconds
-					repeat until the last line of the compact screen text = "DONE. PRESS [RETURN] TO REBOOT."
-					 	delay 0.5
-				 	end repeat
+				with timeout of 30 seconds
+					-- repeat until the last line of the compact screen text = "DONE. PRESS [RETURN] TO REBOOT."
+					-- 	delay 0.5
+				 	-- end repeat
+					waiting until screen equals imagefile POSIX path of (my_path & "done.tiff")
 				end timeout
 			on error
-				do shell script "echo timeout"
+				return "\nIMAGE WRITE TIMEOUT!!!  Check Virtual ][ screen.  Test aborted.\n\n"
 			end try
 
 			-- short test of image, not necessary, next 3 lines can be removed
