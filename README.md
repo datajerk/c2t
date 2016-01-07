@@ -87,6 +87,8 @@ To test, type:
 make test
 ```
 
+Example output: <https://youtu.be/FCOb4f2hYN8>
+
 ## c2t-96h Version
 
 `c2t-96h` is a hacked up version of `c2t` that fixes a few bugs (e.g. `.po` files) and adds better universal (should work on all Apple IIs) 9600 BPS code.  Both `-8` and `-f` activate this new 9600 BPS code.
