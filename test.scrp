@@ -45,6 +45,7 @@ on run argv
 
 		end tell
 		close every machine saving no
+		delay 0.25
 		quit
 	end tell
 end run
