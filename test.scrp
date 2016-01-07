@@ -2,13 +2,15 @@ on run argv
 
 	set my_path to (system attribute "PWD") & "/"
 	set my_test to item 1 of argv
+	set my_done to item 2 of argv
 
 	tell application "Virtual ]["
 		activate
 		delay 0.5
 		-- Close all open machines
 		close every machine saving no
-		-- Create a standard Apple //els 
+		-- Create a new (AppleIIe, AppleIIPlus, AppleII)
+		-- set theMachine to (make new AppleIIPlus)
 		set theMachine to (make new AppleIIe)
 		tell theMachine
 			-- Change to a color screen
@@ -28,14 +30,14 @@ on run argv
 			set speed to maximum
 
 			try
-				with timeout of 30 seconds
+				with timeout of 25 seconds
 					-- repeat until the last line of the compact screen text = "DONE. PRESS [RETURN] TO REBOOT."
 					-- 	delay 0.5
 				 	-- end repeat
-					waiting until screen equals imagefile POSIX path of (my_path & "done.tiff")
+					waiting until screen equals imagefile POSIX path of (my_path & my_done)
 				end timeout
 			on error
-				return "\nIMAGE WRITE TIMEOUT!!!  Check Virtual ][ screen.  Test aborted.\n\n"
+				return "ERROR: TIMEOUT: Virtual ][ screen != " & my_done
 			end try
 
 			-- short test of image, not necessary, next 3 lines can be removed
@@ -44,8 +46,8 @@ on run argv
 			-- delay 3
 
 		end tell
+		delay 0.5
 		close every machine saving no
-		delay 0.25
 		quit
 	end tell
 end run
