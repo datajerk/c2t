@@ -69,7 +69,11 @@ Bugs:
 
 */
 
+#if defined(_WIN32)
+#include "miniz_win32.h"
+#else
 #include "miniz.h"
+#endif
 #include <fake6502.h>
 #include <stdio.h>
 #include <stdlib.h>

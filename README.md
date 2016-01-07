@@ -1,5 +1,7 @@
 ## Use c2t-96h version, see below
 
+> Any place you read `c2t`, substitute `c2t-96h` for now.
+
 ## Introduction
 
 `c2t` is a command line tool that can convert binary code/data and/or Apple-1/II Monitor text, as well as 140K disk images, into audio files suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
@@ -44,7 +46,7 @@ git clone https://github.com/datajerk/c2t.git
 
 Download <https://github.com/datajerk/c2t/archive/master.zip> and extract.
 
-Both the archive and the repo contain an OS/X 64-bit binary (`c2t`) as well as a Windows binary (`windows/c2t.exe`).  Just copy to the to any directory in your path.  OS/X users may need to adjust the permissions, e.g.:
+Both the archive and the repo contain an OS/X 64-bit binary (`c2t`) as well as a Windows binary (`c2t.exe`).  Just copy to the to any directory in your path.  OS/X users may need to adjust the permissions, e.g.:
 ```
 cp c2t /usr/local/bin
 chmod 755 /usr/local/bin/c2t
@@ -56,24 +58,34 @@ make clean
 make
 ```
 
-To build for/from Windows, first install MinGW (<http://www.mingw.org/>), then type from the root of this distribution:
+To build from Windows, first install MinGW (<http://www.mingw.org/>), then type from the root of this distribution:
 ```
 PATH=C:\MinGW\bin;%PATH%
-cd windows
-copy ..\c2t.*
-copy ..\fake6502.h
-gcc -Wall -O3 -static -o c2t c2t.c
-```
-> Use the `miniz.h` in the `windows` directory.
-
-To cross build for Windows from OS/X, first install <http://crossgcc.rts-software.org/doku.php?id=compiling_for_win32>, then type:
-```
-cd windows
-cp ../c2t.*
-cp ../fake6502.h
-/usr/local/gcc-4.8.0-qt-4.8.4-for-mingw32/win32-gcc/bin/i586-mingw32-gcc -Wall -Wno-unused-value -Wno-unused-function -O3 -static -o c2t.exe c2t.c
+gcc -Wall -Wno-unused-value -Wno-unused-function -O3 -static -o c2t c2t.c
 ```
 
+To cross build for Windows from OS/X, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>, then type:
+```
+make windows
+```
+
+## Testing
+
+Automated testing is only supported on OS/X and requires the following:
+
+
+* Virtual ][ (<http://http://www.virtualii.com/>)
+* `zork.dsk` (May be found as `zork_i.dsk`, in any case save as `zork.dsk`)
+* `dangerous_dave.po` (You can find this on Asimov as `dangerous_dave.dsk`, but it's really a PO ordered file, just rename to `.po`.)
+* Windows cross-compiling tools <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>
+* Wine (<http://winehq.org>) installed in `~/wine` (extract the tarball in `~/wine` and move the contents of `~/wine/usr` to `~/wine`, or change the path to `wine` in `test.sh`).
+
+> You can hack `test.sh` if you do not want to test Windows binaries or want to use different disk images for test.
+
+To test, type:
+```
+make test
+```
 
 ## c2t-96h Version
 

@@ -27,7 +27,7 @@ dsk_test()
 
 PATH=~/wine/bin:$PATH
 
-CMD=("./c2t-96h" "wine windows/c2t-96h")
+CMD=("./c2t-96h" "wine c2t-96h.exe")
 
 for i in zork.dsk dangerous_dave.po
 do
