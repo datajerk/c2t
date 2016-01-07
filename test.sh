@@ -6,9 +6,9 @@ PATH=~/wine/bin:$PATH
 # list of commands to test, must be space delimited
 CMD=("./c2t-96h" "wine c2t-96h.exe")
 
-# list of images to test, must be space delimited.
-# Images cannot have spaces in names.
-IMAGES="zork.dsk dangerous_dave.po"
+# list of disks to test, must be space delimited.
+# Disks (and paths to disks) cannot have spaces in names.
+IMAGES="disks/zork.dsk disks/dangerous_dave.po"
 
 dsk_test()
 {
