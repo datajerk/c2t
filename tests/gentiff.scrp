@@ -1,0 +1,60 @@
+on run argv
+
+	set my_path to (system attribute "PWD") & "/"
+	set my_test to item 1 of argv
+	set my_machine to item 2 of argv
+	set my_done to item 3 of argv
+	set dsk to item 4 of argv
+	set loadcmd to item 5 of argv
+
+	tell application "Virtual ]["
+		activate
+		-- delay 0.5
+		delay 1
+		-- Close all open machines
+		close every machine saving no
+		-- Create a new (AppleIIe, AppleIIPlus, AppleII)
+		if my_machine = "iie" then
+			set theMachine to (make new AppleIIe)
+		end if
+		if my_machine = "iip" then
+			set theMachine to (make new AppleIIPlus)
+		end if
+		if my_machine = "ii" then
+			set theMachine to (make new AppleII)
+		end if
+		tell theMachine
+			-- Change to a color screen
+			-- set monochrome screen to false
+			set speaker volume to 0.25
+
+			if dsk = "1" then
+				insert my_path & my_test into device "S6D1"
+			end if
+			-- Now wait for the startup screen
+			delay 0.5
+			reset
+
+			set my_prompt to "*"
+			if loadcmd = "LOAD" then
+				set my_prompt to "]"
+			end if
+	
+			repeat until the last line of the compact screen text = my_prompt
+				delay 0.5
+			end repeat
+
+			-- type line "LOAD"
+			type line loadcmd
+
+			play my_path & "test.aif" on device "cassette recorder"
+			set speed to maximum
+			delay 15
+			snap screen picture to POSIX path of (my_path & my_done) format tiff
+		end tell
+		delay 1
+		close every machine saving no
+		quit
+	end tell
+
+end run

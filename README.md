@@ -75,15 +75,14 @@ Automated testing is only supported on OS/X and requires the following:
 
 
 * Virtual ][ (<http://http://www.virtualii.com/>)
-* `disks/zork.dsk` (May be found as `zork_i.dsk`, in any case save as `zork.dsk`)
-* `disks/dangerous_dave.po` (You can find this on Asimov as `dangerous_dave.dsk`, but it's really a PO ordered file, just rename to `.po`.)
 * Windows cross-compiling tools <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>
 * Wine (<http://winehq.org>) installed in `~/wine` (extract the tarball in `~/wine` and move the contents of `~/wine/usr` to `~/wine`, or change the path to `wine` in `test.sh`).
 
-> You can hack `test.sh` if you do not want to test Windows binaries or want to use different disk images for test.
+> You can hack `test.md` if you do not want to test Windows binaries or want to use different disk images for test.
 
 To test, type:
 ```
+make testclean # only once, unless you want to start over
 make test
 ```
 

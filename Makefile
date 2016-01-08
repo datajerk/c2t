@@ -7,7 +7,7 @@ windows: c2t.exe c2t-96h.exe
 
 dist: all windows
 
-clean:
+clean: testclean
 	rm -f c2t.h c2t c2t-96h c2t.exe c2t-96h.exe
 	cd asm; make clean
 
@@ -27,4 +27,7 @@ c2t.h: mon/dos33.boot1.mon mon/dos33.boot2.mon asm/autoload.s asm/diskload2.s as
 	./makeheader
 
 test: c2t-96h c2t-96h.exe
-	./test.sh
+	cd tests; ./test.sh
+
+testclean:
+	cd tests; rm -f passed test.log
