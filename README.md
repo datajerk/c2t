@@ -78,7 +78,7 @@ Automated testing is only supported on OS/X and requires the following:
 * Windows cross-compiling tools <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>
 * Wine (<http://winehq.org>) installed in `~/wine` (extract the tarball in `~/wine` and move the contents of `~/wine/usr` to `~/wine`, or change the path to `wine` in `test.sh`).
 
-> You can hack `test.md` if you do not want to test Windows binaries or want to use different disk images for test.
+> You can edit `test.md` if you do not want to test Windows binaries or want to use different disk images for test.
 
 To test, type:
 ```
