@@ -3,7 +3,7 @@
 # Path to wine binary for testing Windows binary
 PATH=~/wine/bin:$PATH
 
-TESTS=test.md
+TESTS=$1
 IMAGES=images
 TIFFS=tiffs
 
@@ -61,6 +61,7 @@ _test()
 
 >test.log
 
+echo
 echo "Tests:"
 echo
 grep '^|' $TESTS

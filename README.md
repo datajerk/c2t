@@ -46,9 +46,10 @@ git clone https://github.com/datajerk/c2t.git
 
 Download <https://github.com/datajerk/c2t/archive/master.zip> and extract.
 
-Both the archive and the repo contain an OS/X 64-bit binary (`c2t`) as well as a Windows binary (`c2t.exe`).  Just copy to the to any directory in your path.  OS/X users may need to adjust the permissions, e.g.:
+Both the archive and the repo contain an OS/X 64-bit binary (`c2t`) as well as a Windows 32-bit binary (`c2t.exe`).  Just copy to any directory in your path.
+> OS/X users may need to adjust the permissions, e.g.:
 ```
-cp c2t /usr/local/bin
+cp bin/c2t /usr/local/bin
 chmod 755 /usr/local/bin/c2t
 ```
 
