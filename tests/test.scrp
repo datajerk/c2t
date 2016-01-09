@@ -10,7 +10,7 @@ on run argv
 
 	tell application "Virtual ]["
 		activate
-		delay 1
+		delay 1.5
 		-- Close all open machines
 		close every machine saving no
 		-- Create a new (AppleIIe, AppleIIPlus, AppleII)
@@ -63,7 +63,7 @@ on run argv
 			-- delay 3
 
 		end tell
-		delay 1
+		delay 1.5
 		close every machine saving no
 		quit
 	end tell

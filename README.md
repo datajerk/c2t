@@ -86,6 +86,7 @@ To test, type:
 make testclean # only once, unless you want to start over
 make test
 ```
+> If Virtual ][ crashes while testing, just `make test` again to restart failed test and continue where it left off.
 
 Example output: <https://youtu.be/FCOb4f2hYN8>
 

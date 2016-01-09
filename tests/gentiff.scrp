@@ -6,6 +6,7 @@ on run argv
 	set my_done to item 3 of argv
 	set dsk to item 4 of argv
 	set loadcmd to item 5 of argv
+	set my_delay to item 6 of argv
 
 	tell application "Virtual ]["
 		activate
@@ -26,6 +27,7 @@ on run argv
 		tell theMachine
 			-- Change to a color screen
 			-- set monochrome screen to false
+			set scanlines to true
 			set speaker volume to 0.25
 
 			if dsk = "1" then
@@ -49,7 +51,7 @@ on run argv
 
 			play my_path & "test.aif" on device "cassette recorder"
 			set speed to maximum
-			delay 15
+			delay my_delay
 			snap screen picture to POSIX path of (my_path & my_done) format tiff
 		end tell
 		delay 1
