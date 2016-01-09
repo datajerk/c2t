@@ -26,6 +26,7 @@ on run argv
 		tell theMachine
 			-- Change to a color screen
 			-- set monochrome screen to false
+			set scanlines to true
 			set speaker volume to 0.25
 			if dsk = "1" then
 				insert my_path & my_test into device "S6D1"
