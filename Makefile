@@ -8,7 +8,7 @@ windows: bin/c2t.exe bin/c2t-96h.exe
 dist: all windows
 
 clean: testclean
-	rm -f c2t.h c2t c2t-96h c2t.exe c2t-96h.exe
+	rm -f c2t.h bin/c2t bin/c2t-96h bin/c2t.exe bin/c2t-96h.exe
 	cd asm; make clean
 
 bin/c2t: c2t.c c2t.h
