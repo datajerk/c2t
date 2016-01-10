@@ -118,6 +118,7 @@ To load up your disk or binary to a physical Apple //e or ][+:
 	* CTRL-RESET to get to a `]` prompt
 	* *Optionally* insert a blank disk if loading a disk image
 	* At the `]` prompt type `LOAD` and press *RETURN*
+
 * From your phone, tablet, computer *play* the audio file
 
 Single load binaries will auto extract and execute.  Disk images will auto extract and expand to disk.
