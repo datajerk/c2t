@@ -50,6 +50,7 @@ _test()
 	S2=$(/usr/bin/shasum test.$FILETYPE | awk '{print $1}')
 
 	echo "$IMAGE $S1 $S2" >>test.log
+	echo >>test.log
 
 	if [ "$S1" = "$S2" ]
 	then
