@@ -46,8 +46,8 @@ _test()
 		return 0
 	fi
 
-	S1=$(md5sum ${IMAGE} | awk '{print $1}')
-	S2=$(md5sum test.$FILETYPE | awk '{print $1}')
+	S1=$(/usr/bin/shasum ${IMAGE} | awk '{print $1}')
+	S2=$(/usr/bin/shasum test.$FILETYPE | awk '{print $1}')
 
 	echo "$IMAGE $S1 $S2" >>test.log
 
