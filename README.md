@@ -75,6 +75,14 @@ make windows # or 'make dist' if you want both OS/X and Windows built
 ```
 
 
+## c2t-96h Version
+
+`c2t-96h` is a hacked up version of `c2t` that fixes a few bugs (e.g. `.po` files) and adds better universal (should work on all Apple IIs) 9600 BPS code.  Both `-8` and `-f` activate this new 9600 BPS code.
+
+`c2t-96h` will eventually replace `c2t`.  IOW, use `c2t-96h` for now.
+
+
+
 ## Quick Start
 
 To create an audio file that can auto extract to disk type:
@@ -112,13 +120,6 @@ To load up your disk or binary to a physical Apple //e or ][+:
 * From your phone, tablet, computer *play* the audio file
 
 Single load binaries will auto extract and execute.  Disk images will auto extract and expand to disk.
-
-
-## c2t-96h Version
-
-`c2t-96h` is a hacked up version of `c2t` that fixes a few bugs (e.g. `.po` files) and adds better universal (should work on all Apple IIs) 9600 BPS code.  Both `-8` and `-f` activate this new 9600 BPS code.
-
-`c2t-96h` will eventually replace `c2t`.  IOW, use `c2t-96h` for now.
 
 
 ## Testing
