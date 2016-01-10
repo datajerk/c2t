@@ -81,6 +81,7 @@ make windows # or 'make dist' if you want both OS/X and Windows built
 
 `c2t-96h` will eventually replace `c2t`.  IOW, use `c2t-96h` for now.
 
+Read <https://github.com/datajerk/c2t/raw/master/article/article.pdf> for details.
 
 
 ## Quick Start
