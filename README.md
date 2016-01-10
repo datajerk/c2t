@@ -74,6 +74,7 @@ make clean
 make windows # or 'make dist' if you want both OS/X and Windows built
 ```
 
+
 ## Quick Start
 
 To create an audio file that can auto extract to disk type:
@@ -94,6 +95,32 @@ To create an audio file for a single load binary than can auto extract and execu
 
 > A *Single Load Binary* is defined as a self contained executable that has no disk dependancies (e.g. data, overlays, game save data, high scores, etc...).  The binary must be 100% stateless or it will fail to function properly.  <http://asciiexpress.net/gameserver> has many examples.
 
+In both cases you'll have a `.aif` or `.wav` formatted audio file.  It is critical that they file not be compress to MP3 or other format.  Read <https://github.com/datajerk/c2t/raw/master/article/article.pdf> for details.
+
+To load up your disk or binary to a physical Apple //e or ][+:
+
+* Connect an audio patch code from your phone, tablet, computer, etc... to the cassette-in port of the Apple II.
+	
+	> I just use Dropbox to quickly get these audio files to my iPhone.  I also play them from the Dropbox app.
+	
+* From the Apple II:
+	* Remove any disks
+	* Reboot or power on
+	* CTRL-RESET to get to a `]` prompt
+	* *Optionally* insert a blank disk if loading a disk image
+	* At the `]` prompt type `LOAD` and press *RETURN*
+* From your phone, tablet, computer *play* the audio file
+
+Single load binaries will auto extract and execute.  Disk images will auto extract and expand to disk.
+
+
+## c2t-96h Version
+
+`c2t-96h` is a hacked up version of `c2t` that fixes a few bugs (e.g. `.po` files) and adds better universal (should work on all Apple IIs) 9600 BPS code.  Both `-8` and `-f` activate this new 9600 BPS code.
+
+`c2t-96h` will eventually replace `c2t`.  IOW, use `c2t-96h` for now.
+
+
 ## Testing
 
 Automated testing is only supported on OS/X and requires the following:
@@ -113,12 +140,6 @@ make test
 > If Virtual ][ crashes while testing, just `make test` again to restart failed test and continue where it left off.  Do not type `make testclean` again unless you want to start over.
 
 Example output: <https://youtu.be/FCOb4f2hYN8>
-
-## c2t-96h Version
-
-`c2t-96h` is a hacked up version of `c2t` that fixes a few bugs (e.g. `.po` files) and adds better universal (should work on all Apple IIs) 9600 BPS code.  Both `-8` and `-f` activate this new 9600 BPS code.
-
-`c2t-96h` will eventually replace `c2t`.  IOW, use `c2t-96h` for now.
 
 
 ## Tested disk ][ Configurations
