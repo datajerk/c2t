@@ -1,16 +1,18 @@
 ## Use c2t-96h version, see below
 
-> Any place you read `c2t`, substitute `c2t-96h` for now.
+> Any place you read `c2t`, substitute `c2t-96h` for now (except for `github.com` lines).
 
 ## Introduction
 
 `c2t` is a command line tool that can convert binary code/data and/or Apple-1/II Monitor text, as well as 140K disk images, into audio files suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
 
-`c2t` offers three high-speed options for the 64K Apple II+ and Apple //e: 8000 bps, 8820 bps, and 9600 bps.  The c2t compression option may be used to speedup the delivery of data with all three as well as the native 1333 bps cassette interface ROM routines.
+`c2t` offers three high-speed options for the 64K Apple II+ and Apple //e: 8000 bps, 8820 bps, and 9600 bps.  The `c2t` compression option may be used to speedup the delivery of data with all three as well as the native 1333 bps cassette interface ROM routines.
 
-8820 bps (used to burn CDs) and 9600 bps are not compatible with all II+s and //es.  If you plan to distribute your audio files, then use 8000 bps.  8820 bps and 1333 bps is not an option for disk images.
+8820 bps (used to burn CDs) and 9600 bps are not compatible with all II+s and //es.  If you plan to distribute your audio files, then use 8000 bps.
 
-High-speed and compression options require c2t's custom loader, and at this time that limits you to a single segment.  You can overcome this limitation by concatenating all your code together and creating your own code to shuffle your data around, or, pad each segment with enough zeros to align  subsequent segments with their target address and then use the compress option to minimize this overhead.
+> 8820 bps and 1333 bps is not an option for disk images.
+
+High-speed and compression options require `c2t`'s custom loader, and at this time that limits you to a single segment.  You can overcome this limitation by concatenating all your code together and creating your own code to shuffle your data around, or, pad each segment with enough zeros to align  subsequent segments with their target address and then use the compress option to minimize this overhead.
 
 Multi-segment audio files can be created for the Apple-1, II, II+, and //e that can be loaded using the standard cassette interface ROM routines.
 
@@ -19,10 +21,11 @@ Examples of `c2t` in action:
 - <http://asciiexpress.net/gameserver/readme.html>
 - <http://asciiexpress.net/diskserver/readme.html>
 
+For more info on `c2t` internals please read: <https://github.com/datajerk/c2t/raw/master/article/article.pdf>. 
 
 ### Why?
 
-I created this because I needed a convenient way to get data loaded into my //e without dragging my computer out of my office (2nd floor) to my man cave (basement).  IOW, I needed an iPhone/iPad/mobile solution.  That, and CFFA3000 was sold out--at the time.
+I created this because I needed a convenient way to get data loaded into my //e without dragging my computer out of my office (2nd floor) to my retro man cave (basement).  IOW, I needed an iPhone/iPad/mobile solution.  That, and CFFA3000 was sold out--at the time.
 
 
 #### Yeah, but why?
@@ -46,7 +49,7 @@ git clone https://github.com/datajerk/c2t.git
 
 Download <https://github.com/datajerk/c2t/archive/master.zip> and extract.
 
-Both the archive and the repo contain an OS/X 64-bit binary (`c2t`) as well as a Windows 32-bit binary (`c2t.exe`).  Just copy to any directory in your path.
+Both the archive and the repo `bin` directory contain OS/X 64-bit (`c2t`) and Windows 32-bit (`c2t.exe`) binaries.  Just copy to any directory in your path.
 > OS/X users may need to adjust the permissions, e.g.:
 ```
 cp bin/c2t /usr/local/bin
@@ -67,8 +70,29 @@ gcc -Wall -Wno-unused-value -Wno-unused-function -O3 -static -o c2t c2t.c
 
 To cross build for Windows from OS/X, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>, then type:
 ```
-make windows
+make clean
+make windows # or 'make dist' if you want both OS/X and Windows built
 ```
+
+## Quick Start
+
+To create an audio file that can auto extract to disk type:
+
+`c2t-96h diskimage.dsk audiofilename.aif` or use `.wav`.
+
+> `c2t-96h` supports `.dsk`, `.do`, and `.po` extensions.
+
+> The disk image must be exactly 143360 bytes (140K).  800K disks are not supported.
+
+> Use the `-n` option, e.g. `c2t-96h -n diskimage.dsk audiofilename.aif` if the disk ][ is emulated (e.g. CFFA3000, SDISK //, etc...)
+
+To create an audio file for a single load binary than can auto extract and execute type:
+
+`c2t-96h -2bc8 super_puckman,800 audiofilename.wav` or use `.aif`.
+
+> The input image must be an Apple II binary with or without a 4-byte header.  The 4-byte header is the standard DOS header that defines the binary size and memory location.  Depending on how you extracted the single load binary you may or may not have this header.  If this header is missing you'll have to append to the binary name `,memorylocation` e.g. `,800`.
+
+> A *Single Load Binary* is defined as a self contained executable that has no disk dependancies (e.g. data, overlays, game save data, high scores, etc...).  The binary must be 100% stateless or it will fail to function properly.  <http://asciiexpress.net/gameserver> has many examples.
 
 ## Testing
 
@@ -79,14 +103,14 @@ Automated testing is only supported on OS/X and requires the following:
 * Windows cross-compiling tools <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>
 * Wine (<http://winehq.org>) installed in `~/wine` (extract the tarball in `~/wine` and move the contents of `~/wine/usr` to `~/wine`, or change the path to `wine` in `tests/test.sh`).
 
-> You can edit `tests/test.md` if you do not want to test Windows binaries or want to use different disk images for test.
+> You can edit `tests/test.md` if you do not want to test Windows binaries or want to use different images for test.
 
 To test, type:
 ```
 make testclean # only once, unless you want to start over
 make test
 ```
-> If Virtual ][ crashes while testing, just `make test` again to restart failed test and continue where it left off.
+> If Virtual ][ crashes while testing, just `make test` again to restart failed test and continue where it left off.  Do not type `make testclean` again unless you want to start over.
 
 Example output: <https://youtu.be/FCOb4f2hYN8>
 
@@ -97,7 +121,11 @@ Example output: <https://youtu.be/FCOb4f2hYN8>
 `c2t-96h` will eventually replace `c2t`.  IOW, use `c2t-96h` for now.
 
 
-## Tested Configurations:
+## Tested disk ][ Configurations
+
+> Most, if not all, disk ][ emulators (e.g. CFFA3000, SDISK //, etc...) do not support formatting.  The `-n` must be used for testing in these cases.
+
+The following configurations have been tested:
 
 * Apple //e
 	* Apple disk ][ verified (format and no-format)
