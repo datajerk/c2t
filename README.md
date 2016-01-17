@@ -39,13 +39,7 @@ You clearly do not understand the awesomeness of the Apple II, move along.
 * c2t-96h 0.997 (Dec 31 2015)
 
 
-## Installation
-
-```
-git clone https://github.com/datajerk/c2t.git
-```
-
-*or*
+## Binary Installation
 
 Download <https://github.com/datajerk/c2t/archive/master.zip> and extract.
 
@@ -56,7 +50,18 @@ cp bin/c2t /usr/local/bin
 chmod 755 /usr/local/bin/c2t
 ```
 
-To build from the source (OS/X and Linux):
+An alternative and perhaps simplier install for OS/X:
+```
+sudo curl https://github.com/datajerk/c2t/raw/master/bin/c2t-96h >/usr/local/bin/c2t-96h
+sudo chmod 755 /usr/local/bin/c2t-96h
+```
+
+## Build from Source
+
+```
+git clone https://github.com/datajerk/c2t.git
+```
+To build for OS/X or Linux:
 ```
 make clean
 make
