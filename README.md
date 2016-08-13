@@ -6,7 +6,7 @@
 
 `c2t` is a command line tool that can convert binary code/data and/or Apple-1/II Monitor text, as well as 140K disk images, into audio files suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
 
-`c2t` offers three high-speed options for the 64K Apple II+ and Apple //e: 8000 bps, 8820 bps, and 9600 bps.  The `c2t` compression option may be used to speedup the delivery of data with all three as well as the native 1333 bps cassette interface ROM routines.
+`c2t` offers three high-speed options for the 64K Apple II, II+, and //e: 8000 bps, 8820 bps, and 9600 bps.  The `c2t` compression option may be used to speedup the delivery of data with all three as well as the native 1333 bps cassette interface ROM routines.
 
 8820 bps (used to burn CDs) and 9600 bps are not compatible with all II+s and //es.  If you plan to distribute your audio files, then use 8000 bps.
 
