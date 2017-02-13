@@ -154,7 +154,7 @@ Example output: <https://youtu.be/FCOb4f2hYN8>
 
 ## Tested disk ][ Configurations
 
-> Most, if not all, disk ][ emulators (e.g. CFFA3000, SDISK //, etc...) do not support formatting.  The `-n` must be used for testing in these cases.
+> Most, if not all, disk ][ emulators (e.g. CFFA3000, SDISK //, etc...) do not support formatting.  The `-n` option must be used for testing in these cases.
 
 The following configurations have been tested:
 
