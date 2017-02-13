@@ -86,7 +86,7 @@ make windows # or 'make dist' if you want both OS/X and Windows built
 
 `c2t-96h` will eventually replace `c2t`.  IOW, use `c2t-96h` for now.
 
-> Older computers (e.g. circa 2008 MacBooks) have issues playing the `c2t-96h` generated output.  If you experience problems with `c2t-96h -f` or `c2t-96h -8` use `c2t -8`.
+> Older computers (e.g. circa 2008 MacBooks) have issues playing the `c2t-96h` generated output.  If you experience problems with `c2t-96h -f` or `c2t-96h -8` use `c2t -8`.  The merged `c2t` + `c2t-96h` version will support old and new computers.
 
 Read <https://github.com/datajerk/c2t/raw/master/article/article.pdf> for details.
 
