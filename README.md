@@ -1,7 +1,3 @@
-## Use c2t-96h version, see below
-
-> Any place you read `c2t`, substitute `c2t-96h` for now (except for `github.com` lines).
-
 ## Introduction
 
 `c2t` is a command line tool that can convert binary code/data and/or Apple-1/II Monitor text, as well as 140K disk images, into audio files suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
@@ -47,13 +43,17 @@ Both the archive and the repo `bin` directory contain OS/X 64-bit (`c2t`) and Wi
 > OS/X users may need to adjust the permissions, e.g.:
 ```
 cp bin/c2t /usr/local/bin
+cp bin/c2t-96h /usr/local/bin
 chmod 755 /usr/local/bin/c2t
+chmod 755 /usr/local/bin/c2t-96h
 ```
 
 An alternative and perhaps simplier install for OS/X:
 ```
 sudo curl https://github.com/datajerk/c2t/raw/master/bin/c2t-96h >/usr/local/bin/c2t-96h
 sudo chmod 755 /usr/local/bin/c2t-96h
+sudo curl https://github.com/datajerk/c2t/raw/master/bin/c2t-96h >/usr/local/bin/c2t
+sudo chmod 755 /usr/local/bin/c2t
 ```
 
 ## Build from Source
@@ -85,6 +85,8 @@ make windows # or 'make dist' if you want both OS/X and Windows built
 `c2t-96h` is a hacked up version of `c2t` that fixes a few bugs (e.g. `.po` files) and adds better universal (should work on all Apple IIs) 9600 BPS code.  Both `-8` and `-f` activate this new 9600 BPS code.
 
 `c2t-96h` will eventually replace `c2t`.  IOW, use `c2t-96h` for now.
+
+> Older computers (e.g. circa 2008 MacBooks) have issues playing the `c2t-96h` generated output.  If you experience problems with `c2t-96h -f` or `c2t-96h -8` use `c2t -8`.
 
 Read <https://github.com/datajerk/c2t/raw/master/article/article.pdf> for details.
 
