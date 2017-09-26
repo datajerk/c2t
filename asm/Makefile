@@ -1,5 +1,5 @@
 CL = cl65
-CL_FLAGS = -t none --listing --list-bytes 100
+CL_FLAGS = -t none --listing # --list-bytes 100
 #CL_FLAGS = -t apple1 -C apple1-16k.cfg  --listing --list-bytes 100
 CC = cl65
 CC_FLAGS = --static-locals -t apple1 -C apple1-16k.cfg
