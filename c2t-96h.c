@@ -1,8 +1,8 @@
 /*
 
-c2t, Code to Tape|Text, Version 0.995, Tue May 22 22:11:12 GMT 2012
+c2t, Code to Tape|Text, Version 0.997, Wed Sep 27 15:27:56 GMT 2017
 
-Parts copyright (c) 2011, 2012 All Rights Reserved, Egan Ford (egan@sense.net)
+Parts copyright (c) 2011-2017 All Rights Reserved, Egan Ford (egan@sense.net)
 
 THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
 KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
