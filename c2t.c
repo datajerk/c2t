@@ -496,7 +496,8 @@ int main(int argc, char **argv)
 	// write out code
 	if(!autoload  && !dsk) {
 		int i, j;
-		unsigned long cmp_len;
+		//unsigned long cmp_len;
+		size_t cmp_len;
 		unsigned char *cmp_data;
 		char checksum;
 
@@ -553,7 +554,8 @@ int main(int argc, char **argv)
 	if(autoload) {
 		char eta[40], loading[]=" LOADING ";
 		unsigned char byte, checksum, *cmp_data, table[12];
-		unsigned long ones=0, zeros=0, cmp_len;
+		unsigned long ones=0, zeros=0;
+		size_t cmp_len;
 		unsigned int length, move_len;
 		int i, j;
 
@@ -994,7 +996,8 @@ int main(int argc, char **argv)
 	if(dsk) {
 		char eta[40];
 		unsigned char byte, checksum=0xff, *cmp_data, start_table[21], *diskloadcode;
-		unsigned long ones=0, zeros=0, cmp_len, diskloadcode_len;
+		unsigned long ones=0, zeros=0, diskloadcode_len;
+		size_t cmp_len;
 		unsigned int length, start_table_len = 0;
 		int i, j;
 		double inflate_times[5];
