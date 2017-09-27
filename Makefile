@@ -12,16 +12,16 @@ clean: testclean
 	cd asm; make clean
 
 bin/c2t: c2t.c c2t.h
-	gcc -Wall -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t c2t.c -lm
+	gcc -Wall -Wno-strict-aliasing -Wno-misleading-indentation -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t c2t.c -lm
 
 bin/c2t-96h: c2t-96h.c c2t.h
-	gcc -Wall -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t-96h c2t-96h.c -lm
+	gcc -Wall -Wno-strict-aliasing -Wno-misleading-indentation -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t-96h c2t-96h.c -lm
 
 bin/c2t.exe: c2t.c c2t.h
-	$(WIN32GCC) -Wall -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t.exe c2t.c
+	$(WIN32GCC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t.exe c2t.c
 
 bin/c2t-96h.exe: c2t-96h.c c2t.h
-	$(WIN32GCC) -Wall -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t-96h.exe c2t-96h.c
+	$(WIN32GCC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t-96h.exe c2t-96h.c
 
 c2t.h: mon/dos33.boot1.mon mon/dos33.boot2.mon asm/autoload.s asm/diskload2.s asm/diskload3.s asm/diskload8000.s asm/diskload9600.s asm/fastload8000.s asm/fastload9600.s asm/fastloadcd.s asm/inflate.s
 	./makeheader

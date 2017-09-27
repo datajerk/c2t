@@ -1,9 +1,5 @@
 CL = cl65
-CL_FLAGS = -t none --listing # --list-bytes 100
-#CL_FLAGS = -t apple1 -C apple1-16k.cfg  --listing --list-bytes 100
-CC = cl65
-CC_FLAGS = --static-locals -t apple1 -C apple1-16k.cfg
-C2T = c2t
+CL_FLAGS = -t none --listing --list-bytes 100
 
 ASRC = $(shell echo *.s)
 AOBJ = $(ASRC:%.s=%.o)
@@ -18,10 +14,3 @@ clean:
 
 %: %.s
 	$(CL) $(CL_FLAGS) $< 
-
-%: %.c
-	$(CC) $(CC_FLAGS) $< 
-
-%.mon: %
-	$(C2T) $< $@
-

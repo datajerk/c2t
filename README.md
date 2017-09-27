@@ -58,6 +58,11 @@ sudo chmod 755 /usr/local/bin/c2t
 
 ## Build from Source
 
+Prerequisites:
+
+- `cl65` version 2.13.3 (<https://github.com/mrdudz/cc65-old/blob/master/cc65-sources-2.13.3.tar.bz2>)
+
+
 ```
 git clone https://github.com/datajerk/c2t.git
 ```

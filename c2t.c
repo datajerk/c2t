@@ -468,7 +468,8 @@ int main(int argc, char **argv)
 
 	if(outputtype == MONITOR) {
 		int i, j, saddr;
-		unsigned long cmp_len;
+		// unsigned long cmp_len;
+		size_t cmp_len;
 		unsigned char *cmp_data;
 
 		for(i=0;i<numseg;i++) {
