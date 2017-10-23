@@ -57,6 +57,7 @@ Notes:
 Not yet done:
 	*  Test big-endian.
 	*  gnuindent
+    *  Redo malloc code in appendtone
 
 Thinking about:
 	*  Check for existing file and abort, or warn, or prompt.
@@ -97,32 +98,23 @@ Bugs:
 	for(wb_j=0;wb_j<8;wb_j++) { \
 		if(wb_temp & 0x80) { \
 			if(freq1 == 6000) { \
-				appendtone(&buf,freq1,0,0.5); \
-				appendtone(&buf,freq0,0,0.5); \
+				appendtone(&output,&outputlength,freq1,rate,0,0.5,&offset); \
+				appendtone(&output,&outputlength,freq0,rate,0,0.5,&offset); \
 			} \
 			else { \
-				appendtone(&buf,freq1,0,1); \
+				appendtone(&output,&outputlength,freq1,rate,0,1,&offset); \
 			} \
 		} \
 		else { \
-			appendtone(&buf,freq0,0,1); \
+			appendtone(&output,&outputlength,freq0,rate,0,1,&offset); \
 		} \
 		wb_temp<<=1; \
 	} \
 }
 
-typedef struct outbuf {
-	double *sound;
-	long length;
-	long capacity;
-	int offset;
-	int rate;
-} outbuf;
-
 void usage();
 char *getext(char *filename);
-void outbuf_init(outbuf *buf, int rate);
-void appendtone(outbuf *buf, int freq, double time, double cycles);
+void appendtone(double **sound, long *length, int freq, int rate, double time, double cycles, int *offset);
 void Write_AIFF(FILE * fptr, double *samples, long nsamples, int nfreq, int bits, double amp);
 void Write_WAVE(FILE * fptr, double *samples, long nsamples, int nfreq, int bits, double amp);
 void ConvertToIeeeExtended(double num, unsigned char *bytes);
@@ -168,9 +160,9 @@ int square = 1;
 int main(int argc, char **argv)
 {
 	FILE *ofp;
-	outbuf buf;
-	double amp=0.75;
-	int i, c, model=0, outputtype, fileoutput=1, warm=0, dsk=0, noformat=0, k8=0, qr=0;
+	double *output = NULL, amp=0.75;
+	long outputlength=0;
+	int i, c, model=0, outputtype, offset=0, fileoutput=1, warm=0, dsk=0, noformat=0, k8=0, qr=0;
 	int autoload=0, basicload=0, compress=0, fast=0, cd=0, tape=0, endpage=0, longmon=0, rate=11025, bits=8, freq0=2000, freq1=1000, freq_pre=770, freq_end=770;
 	char *filetypes[] = {"binary","monitor","aiff","wave","disk"};
 	char *modeltypes[] = {"\b","I","II"};
@@ -267,7 +259,7 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	// read input files
+	// read intput files
 
 	fprintf(stderr,"\n");
 	for(i=optind;i<argc-fileoutput;i++) {
@@ -582,8 +574,6 @@ int main(int argc, char **argv)
 		return 0;
 	}
 
-	outbuf_init(&buf, rate);
-
 	// write out code
 	if(!autoload  && !dsk) {
 		int i, j;
@@ -595,13 +585,13 @@ int main(int argc, char **argv)
 		for(i=0;i<numseg;i++) {
 			// header
 			if(model == 1) {
-				appendtone(&buf,1000,4.0+tape,0);
-				appendtone(&buf,2000,0,1);
+				appendtone(&output,&outputlength,1000,rate,4.0+tape,0,&offset);
+				appendtone(&output,&outputlength,2000,rate,0,1,&offset);
 			}
 			else {
-				appendtone(&buf,770,4.0+tape,0);
-				appendtone(&buf,2500,0,0.5);
-				appendtone(&buf,2000,0,0.5);
+				appendtone(&output,&outputlength,770,rate,4.0+tape,0,&offset);
+				appendtone(&output,&outputlength,2500,rate,0,0.5,&offset);
+				appendtone(&output,&outputlength,2000,rate,0,0.5,&offset);
 			}
 			checksum = 0xff;
 
@@ -619,7 +609,7 @@ int main(int argc, char **argv)
 			// checksum/endbits
 			if(model == 2)
 				WRITEBYTE(checksum);
-			appendtone(&buf,1000,0,1);
+			appendtone(&output,&outputlength,1000,rate,0,1,&offset);
 		}
 
 		// friendly help
@@ -651,9 +641,9 @@ int main(int argc, char **argv)
 		unsigned int length, move_len;
 		int i, j;
 
-		appendtone(&buf,770,4.0+tape,0);
-		appendtone(&buf,2500,0,0.5);
-		appendtone(&buf,2000,0,0.5);
+		appendtone(&output,&outputlength,770,rate,4.0+tape,0,&offset);
+		appendtone(&output,&outputlength,2500,rate,0,0.5,&offset);
+		appendtone(&output,&outputlength,2000,rate,0,0.5,&offset);
 
 		// compute uncompressed ETA
 		for(j=0;j<segments[0].length;j++) {
@@ -836,10 +826,10 @@ int main(int argc, char **argv)
 			}
 			WRITEBYTE(checksum);
 
-			appendtone(&buf,1000,0,1);
-			appendtone(&buf,770,4.0,0);
-			appendtone(&buf,2500,0,0.5);
-			appendtone(&buf,2000,0,0.5);
+			appendtone(&output,&outputlength,1000,rate,0,1,&offset);
+			appendtone(&output,&outputlength,770,rate,4.0,0,&offset);
+			appendtone(&output,&outputlength,2500,rate,0,0.5,&offset);
+			appendtone(&output,&outputlength,2000,rate,0,0.5,&offset);
 
 			// write out basic program
 			checksum = 0xff;
@@ -967,13 +957,13 @@ int main(int argc, char **argv)
 
 		WRITEBYTE(checksum);
 
-		appendtone(&buf,1000,0,1);
+		appendtone(&output,&outputlength,1000,rate,0,1,&offset);
 		if(fast || cd || k8)
-			appendtone(&buf,freq_pre,0.25,0);
+			appendtone(&output,&outputlength,freq_pre,rate,0.25,0,&offset);
 		else {
-			appendtone(&buf,770,4.0,0);
-			appendtone(&buf,2500,0,0.5);
-			appendtone(&buf,2000,0,0.5);
+			appendtone(&output,&outputlength,770,rate,4.0,0,&offset);
+			appendtone(&output,&outputlength,2500,rate,0,0.5,&offset);
+			appendtone(&output,&outputlength,2000,rate,0,0.5,&offset);
 		}
 
 		// now the code
@@ -992,10 +982,10 @@ int main(int argc, char **argv)
 
 		if(qr) {
 			char loading[]="LOADING ";
-			buf.length = 0;
+			outputlength = 0;
 
 			// 0.25 sec
-			appendtone(&buf,freq_pre,0.25,0);
+			appendtone(&output,&outputlength,freq_pre,rate,0.25,0,&offset);
 
 			checksum = 0xff;
 
@@ -1036,10 +1026,10 @@ int main(int argc, char **argv)
 			WRITEBYTE(checksum);
 
 			// end of parameters
-			appendtone(&buf,freq_end,0,2);
+			appendtone(&output,&outputlength,freq_end,rate,0,2,&offset);
 
 			// time to processes
-			appendtone(&buf,freq_pre,0.25,0);
+			appendtone(&output,&outputlength,freq_pre,rate,0.25,0,&offset);
 		}
 
 		checksum = 0xff;
@@ -1063,11 +1053,11 @@ int main(int argc, char **argv)
 		WRITEBYTE(checksum);
 
 		if(fast || cd || k8)
-			//appendtone(&buf,freq_end,0,1);
-			appendtone(&buf,freq_end,0,10);
+			//appendtone(&output,&outputlength,freq_end,rate,0,1,&offset);
+			appendtone(&output,&outputlength,freq_end,rate,0,10,&offset);
 		else
-			//appendtone(&buf,1000,0,1);
-			appendtone(&buf,1000,0,10);
+			//appendtone(&output,&outputlength,1000,rate,0,1,&offset);
+			appendtone(&output,&outputlength,1000,rate,0,10,&offset);
 
 		if(!qr) {
 			if(basicload) {
@@ -1105,12 +1095,12 @@ int main(int argc, char **argv)
 			diskloadcode_len = sizeof(diskload9600)/sizeof(char);
 		}
 
-		registerevent(events,buf.length,"770Hz Preamble + Sync Bit");
+		registerevent(events,outputlength,"770Hz Preamble + Sync Bit");
 
 		rate = 48000;
-		appendtone(&buf,770,4.0+tape,0);
-		appendtone(&buf,2500,0,0.5);
-		appendtone(&buf,2000,0,0.5);
+		appendtone(&output,&outputlength,770,rate,4.0+tape,0,&offset);
+		appendtone(&output,&outputlength,2500,rate,0,0.5,&offset);
+		appendtone(&output,&outputlength,2000,rate,0,0.5,&offset);
 
 		for(j=0;j<sizeof(diskloadcode2)/sizeof(char);j++) {
 			byte=diskloadcode2[j];
@@ -1180,14 +1170,14 @@ int main(int argc, char **argv)
 		}
 		WRITEBYTE(checksum);
 
-		registerevent(events,buf.length,"BASIC Header + 770Hz Preamble");
+		registerevent(events,outputlength,"BASIC Header + 770Hz Preamble");
 
-		appendtone(&buf,1000,0,1);
-		appendtone(&buf,770,4.0,0);
-		appendtone(&buf,2500,0,0.5);
-		appendtone(&buf,2000,0,0.5);
+		appendtone(&output,&outputlength,1000,rate,0,1,&offset);
+		appendtone(&output,&outputlength,770,rate,4.0,0,&offset);
+		appendtone(&output,&outputlength,2500,rate,0,0.5,&offset);
+		appendtone(&output,&outputlength,2000,rate,0,0.5,&offset);
 
-		registerevent(events,buf.length,"BASIC Stub/Assembly 9600 BPS Code @ 1333 BPS");
+		registerevent(events,outputlength,"BASIC Stub/Assembly 9600 BPS Code @ 1333 BPS");
 
 		// write out basic program
 		checksum = 0xff;
@@ -1213,17 +1203,17 @@ int main(int argc, char **argv)
 
 		WRITEBYTE(checksum);
 
-		registerevent(events,buf.length,"INSTA-DISK Code + DOS Load @ 9600 BPS");
+		registerevent(events,outputlength,"INSTA-DISK Code + DOS Load @ 9600 BPS");
 
-		appendtone(&buf,1000,0,1);
+		appendtone(&output,&outputlength,1000,rate,0,1,&offset);
 		freq0 = 12000;
 		if(k8) {
 			freq1 = 6000;
-			appendtone(&buf,2000,0.25,0);
+			appendtone(&output,&outputlength,2000,rate,0.25,0,&offset);
 		}
 		else {
 			freq1 = 8000;
-			appendtone(&buf,6000,0.25,0);
+			appendtone(&output,&outputlength,6000,rate,0.25,0,&offset);
 		}
 
 		checksum = 0xff;
@@ -1374,21 +1364,21 @@ int main(int argc, char **argv)
 
 		WRITEBYTE(checksum);
 		if(k8) {
-			appendtone(&buf,770,0,2);
-			appendtone(&buf,2000,0.3,0);
+			appendtone(&output,&outputlength,770,rate,0,2,&offset);
+			appendtone(&output,&outputlength,2000,rate,0.3,0,&offset);
 		}
 		else {
-			appendtone(&buf,2000,0,1);
-			appendtone(&buf,6000,0.1,0);
+			appendtone(&output,&outputlength,2000,rate,0,1,&offset);
+			appendtone(&output,&outputlength,6000,rate,0.1,0,&offset);
 		}
 
 		for(i=0;i<numseg;i++) {
-			//appendtone(&buf,6000,1,0);
+			//appendtone(&output,&outputlength,6000,rate,1,0,&offset);
 
 //timing
 			if(i==0) {
 				if(!noformat) {
-					registerevent(events,buf.length,"Format Disk Delay (2000 Hz)");
+					registerevent(events,outputlength,"Format Disk Delay (2000 Hz)");
 					j=28;
 				}
 				else
@@ -1407,7 +1397,7 @@ int main(int argc, char **argv)
 				// CFFA3000 3.1 failed with IBM 4GB Microdrive (too slow)
 				// Nishida Radio SDISK // (no-format only)
 
-				registerevent(events,buf.length,"Inflate + Write Delay (2000 Hz)");
+				registerevent(events,outputlength,"Inflate + Write Delay (2000 Hz)");
 			}
 			if(i==1) // seek time for track 0, just in case
 				j+=2;
@@ -1422,16 +1412,16 @@ int main(int argc, char **argv)
 				WRITEBYTE(0x00);
 				checksum ^= 0x00;
 				WRITEBYTE(checksum);
-				appendtone(&buf,2000,0,1);
-				appendtone(&buf,6000,1,0);
+				appendtone(&output,&outputlength,2000,rate,0,1,&offset);
+				appendtone(&output,&outputlength,6000,rate,1,0,&offset);
 			}
 */
 			if(k8)
-				appendtone(&buf,2000,j,0);
+				appendtone(&output,&outputlength,2000,rate,j,0,&offset);
 			else
-				appendtone(&buf,6000,j,0);
+				appendtone(&output,&outputlength,6000,rate,j,0,&offset);
 
-			registerevent(events,buf.length,"Load Segment @ 9600 BPS");
+			registerevent(events,outputlength,"Load Segment @ 9600 BPS");
 
 			checksum = 0xff;
 			for(j=0;j<segments[i].length;j++) {
@@ -1440,53 +1430,44 @@ int main(int argc, char **argv)
 			}
 			WRITEBYTE(checksum);
 			if(k8)
-				//appendtone(&buf,770,0,2);
-				appendtone(&buf,770,0,10);
+				//appendtone(&output,&outputlength,770,rate,0,2,&offset);
+				appendtone(&output,&outputlength,770,rate,0,10,&offset);
 			else
-				//appendtone(&buf,2000,0,1);
-				appendtone(&buf,2000,0,10);
+				//appendtone(&output,&outputlength,2000,rate,0,1,&offset);
+				appendtone(&output,&outputlength,2000,rate,0,10,&offset);
 		}
-		fprintf(stderr,"Times: Data: %f, Inflate: %f, Audio: %f, File: %s\n\n",total_data_time,total_inflate_time,buf.length/(float)rate,segments[0].filename);
+		fprintf(stderr,"Times: Data: %f, Inflate: %f, Audio: %f, File: %s\n\n",total_data_time,total_inflate_time,outputlength/(float)rate,segments[0].filename);
 
-		registerevent(events,buf.length,"Inflate + Exit");
+		registerevent(events,outputlength,"Inflate + Exit");
 		printevents(events,rate);
 
 		fprintf(stderr,"To load up and run on your Apple %s, type:\n\n\tLOAD\n\n",modeltypes[model]);
 	}
 
 	// append zero to zero out last wave
-	appendtone(&buf,0,0,1);
+	appendtone(&output,&outputlength,0,rate,0,1,&offset);
 
 	// 0.1 sec quiet to help some emulators
-	appendtone(&buf,0,0.1,0);
+	appendtone(&output,&outputlength,0,rate,0.1,0,&offset);
 
 	// 0.4 sec quiet to help some IIs
-	// appendtone(&buf,0,0.4,0);
+	// appendtone(&output,&outputlength,0,rate,0.4,0,&offset);
 
 	// write it
 	if(outputtype == AIFF)
-		Write_AIFF(ofp,buf.sound,buf.length,rate,bits,amp);
+		Write_AIFF(ofp,output,outputlength,rate,bits,amp);
 	else if(outputtype == WAVE)
-		Write_WAVE(ofp,buf.sound,buf.length,rate,bits,amp);
+		Write_WAVE(ofp,output,outputlength,rate,bits,amp);
 
 	fclose(ofp);
 	return 0;
 }
 
-void outbuf_init(outbuf *buf, int rate)
+void appendtone(double **sound, long *length, int freq, int rate, double time, double cycles, int *offset)
 {
-	buf->capacity = 65536;
-	buf->sound = (double *)malloc(buf->capacity * sizeof(double));
-	buf->length = 0;
-	buf->offset = 0;
-	buf->rate = rate;
-}
-
-void appendtone(outbuf *buf, int freq, double time, double cycles)
-{
-	int rate = buf->rate;
-	int length = buf->length;
 	long i, n=time*rate;
+	static long grow = 0;
+	double *tmp = NULL;
 
 	if(freq && cycles)
 		n=cycles*rate/freq;
@@ -1500,17 +1481,13 @@ void appendtone(outbuf *buf, int freq, double time, double cycles)
 	*sound = tmp;
 */
 
-	// grow capacity of buffer if needed, using size-doubling approach
-	if(buf->capacity < length + n) {
-		long new_cap = buf->capacity;
-		while(new_cap < length + n) {
-			new_cap *= 2;
-		}
-		double *tmp = (double *)realloc(buf->sound, new_cap * sizeof(double));
-		if(tmp == NULL)
+// new code for speed up realloc
+// should use double alg
+	if(*length + n > grow) {
+		grow = *length + n + 1000000;
+		if((tmp = (double *)realloc(*sound, (grow) * sizeof(double))) == NULL)
 			abort();
-		buf->sound = tmp;
-		buf->capacity = new_cap;
+		*sound = tmp;
 	}
 
 //tmp -> (*sound)
@@ -1524,26 +1501,26 @@ void appendtone(outbuf *buf, int freq, double time, double cycles)
 	if(square) {
 		double last = -1;
 
-		if(buf->offset)
+		if(*offset)
 			last = 1;
 
 		if(freq)
 			for(i=0;i<n;i++) {
-				double a = (int)(1000*sin(2*M_PI*i*freq/rate + buf->offset*M_PI)) / 1000.0;
-				last = buf->sound[length+i] = (a == 0) ? -((last > 0) - (last < 0)) : ((a > 0) - (a < 0));
+				double a = (int)(1000*sin(2*M_PI*i*freq/rate + *offset*M_PI)) / 1000.0;
+				last = (*sound)[*length+i] = (a == 0) ? -((last > 0) - (last < 0)) : ((a > 0) - (a < 0));
 			}
 		else
 			for (i = 0; i < n; i++)
-				buf->sound[length + i] = 0;
+				(*sound)[*length + i] = 0;
 	}
 	else
 		for(i=0;i<n;i++)
-			buf->sound[length+i] = sin(2*M_PI*i*freq/rate + buf->offset*M_PI);
+			(*sound)[*length+i] = sin(2*M_PI*i*freq/rate + *offset*M_PI);
 
 	if(cycles - (int)cycles == 0.5)
-		buf->offset = (buf->offset == 0);
+		*offset = (*offset == 0);
 
-	buf->length += n;
+	*length += n;
 }
 
 char *getext(char *filename)
