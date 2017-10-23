@@ -582,6 +582,8 @@ int main(int argc, char **argv)
 		return 0;
 	}
 
+	if(dsk)
+		rate = 48000;
 	outbuf_init(&buf, rate);
 
 	// write out code
@@ -1107,7 +1109,6 @@ int main(int argc, char **argv)
 
 		registerevent(events,buf.length,"770Hz Preamble + Sync Bit");
 
-		rate = 48000;
 		appendtone(&buf,770,4.0+tape,0);
 		appendtone(&buf,2500,0,0.5);
 		appendtone(&buf,2000,0,0.5);
