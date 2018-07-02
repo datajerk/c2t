@@ -12,10 +12,10 @@ clean: testclean
 	cd asm; make clean
 
 bin/c2t: c2t.c c2t.h
-	gcc -Wall -Wno-strict-aliasing -Wno-misleading-indentation -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t c2t.c -lm
+	gcc -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t c2t.c -lm
 
 bin/c2t-96h: c2t-96h.c c2t.h
-	gcc -Wall -Wno-strict-aliasing -Wno-misleading-indentation -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t-96h c2t-96h.c -lm
+	gcc -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t-96h c2t-96h.c -lm
 
 bin/c2t.exe: c2t.c c2t.h
 	$(WIN32GCC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t.exe c2t.c
