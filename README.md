@@ -141,7 +141,7 @@ Single load binaries will auto extract and execute.  Disk images will auto extra
 Automated testing is only supported on OS/X and requires the following:
 
 
-* Virtual ][ (<http://http://www.virtualii.com/>)
+* Virtual ][ 7.6 (<http://http://www.virtualii.com/>)
 * Windows cross-compiling tools <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>
 * Wine (<http://winehq.org>) installed in `~/wine` (extract the tarball in `~/wine` and move the contents of `~/wine/usr` to `~/wine`, or change the path to `wine` in `tests/test.sh`).
 
