@@ -50,9 +50,9 @@ chmod 755 /usr/local/bin/c2t-96h
 
 An alternative and perhaps simplier install for OS/X:
 ```
-sudo curl https://github.com/datajerk/c2t/raw/master/bin/c2t-96h >/usr/local/bin/c2t-96h
+sudo curl https://raw.githubusercontent.com/datajerk/c2t/master/bin/c2t-96h >/usr/local/bin/c2t-96h
 sudo chmod 755 /usr/local/bin/c2t-96h
-sudo curl https://github.com/datajerk/c2t/raw/master/bin/c2t-96h >/usr/local/bin/c2t
+sudo curl https://raw.githubusercontent.com/datajerk/c2t/master/bin/c2t >/usr/local/bin/c2t
 sudo chmod 755 /usr/local/bin/c2t
 ```
 
