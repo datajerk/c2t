@@ -75,7 +75,7 @@ make
 To build from Windows, first install MinGW (<http://www.mingw.org/>), then type from the root of this distribution:
 ```
 PATH=C:\MinGW\bin;%PATH%
-gcc -Wall -Wno-unused-value -Wno-unused-function -I. -O3 -static -o c2t c2t.c
+gcc -Wall -Wno-unused-value -Wno-unused-function -Wno-misleading-indentation -I. -O3 -static -o c2t c2t.c
 ```
 
 To cross build for Windows from OS/X, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>, then type:
