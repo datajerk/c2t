@@ -43,10 +43,8 @@ Both the archive and the repo `bin` directory contain OS/X 64-bit (`c2t`) and Wi
 > OS/X users may need to adjust the permissions, e.g.:
 >
 ```
-cp bin/c2t /usr/local/bin
-cp bin/c2t-96h /usr/local/bin
-chmod 755 /usr/local/bin/c2t
-chmod 755 /usr/local/bin/c2t-96h
+sudo cp bin/c2t bin/c2t-96h /usr/local/bin
+sudo chmod 755 /usr/local/bin/c2t-96h /usr/local/bin/c2t
 ```
 
 An alternative and perhaps simplier install for OS/X:
@@ -89,7 +87,7 @@ make clean
 make windows # or 'make dist' if you want both OS/X and Windows built
 ```
 
-> If MacOS errors with _cannot be opened because the developer cannot be verified_ with the mingw32 gcc binaries type:
+> If MacOS errors with _cannot be opened because the developer cannot be verified_ with the mingw32 gcc binaries, then type:
 > 
 ```
 sudo xattr -r -d com.apple.quarantine /usr/local/gcc-4.8.0-qt-4.8.4-for-mingw32
@@ -158,7 +156,7 @@ Automated testing is only supported on OS/X and requires the following:
 
 > You can edit `tests/test.md` if you do not want to test Windows binaries or want to use different images for test.
 
-Build wine32 container:
+Build wine32 container (if testing Windows binaries):
 
 ```
 # start docker first, make sure it is running
