@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to wine binary for testing Windows binary
-PATH=~/wine/bin:$PATH
+PATH=.:$PATH
 
 TESTS=$1
 IMAGES=images
