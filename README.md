@@ -39,15 +39,15 @@ You clearly do not understand the awesomeness of the Apple II, move along.
 
 Download <https://github.com/datajerk/c2t/archive/master.zip> and extract.
 
-Both the archive and the repo `bin` directory contain OS/X 64-bit (`c2t`) and Windows 32-bit (`c2t.exe`) binaries.  Just copy to any directory in your path.
-> OS/X users may need to adjust the permissions, e.g.:
+Both the archive and the repo `bin` directory contain MacOS 64-bit (`c2t`) and Windows 32-bit (`c2t.exe`) binaries.  Just copy to any directory in your path.
+> MacOS users may need to adjust the permissions, e.g.:
 >
 ```
 sudo cp bin/c2t bin/c2t-96h /usr/local/bin
 sudo chmod 755 /usr/local/bin/c2t-96h /usr/local/bin/c2t
 ```
 
-An alternative and perhaps simplier install for OS/X:
+An alternative and perhaps simplier install for MacOS:
 
 ```
 sudo curl https://raw.githubusercontent.com/datajerk/c2t/master/bin/c2t-96h >/usr/local/bin/c2t-96h
@@ -66,7 +66,7 @@ Prerequisites:
 git clone https://github.com/datajerk/c2t.git
 ```
 
-To build for OS/X or Linux:
+To build for MacOS or Linux:
 
 ```
 make clean
@@ -80,11 +80,11 @@ PATH=C:\MinGW\bin;%PATH%
 gcc -Wall -Wno-unused-value -Wno-unused-function -Wno-misleading-indentation -I. -O3 -static -o c2t c2t.c
 ```
 
-To cross build for Windows from OS/X, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>, then type:
+To cross build for Windows from MacOS, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>, then type:
 
 ```
 make clean
-make windows # or 'make dist' if you want both OS/X and Windows built
+make windows # or 'make dist' if you want both MacOS and Windows built
 ```
 
 > If MacOS errors with _cannot be opened because the developer cannot be verified_ with the mingw32 gcc binaries, then type:
@@ -147,7 +147,7 @@ Single load binaries will auto extract and execute.  Disk images will auto extra
 
 ## Testing
 
-Automated testing is only supported on OS/X and requires the following:
+Automated testing is only supported on MacOS and requires the following:
 
 
 * Virtual ][ 9.2 (<http://http://www.virtualii.com/>)
