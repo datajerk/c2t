@@ -12,7 +12,7 @@ macos: bin/c2t_x86 bin/c2t_arm bin/c2t-96h_x86 bin/c2t-96h_arm
 	lipo -create -output bin/c2t bin/c2t_x86 bin/c2t_arm
 	lipo -create -output bin/c2t-96h bin/c2t-96h_x86 bin/c2t-96h_arm
 
-dist: windows macos
+dist: macos windows
 
 clean: testclean
 	rm -f c2t.h bin/c2t bin/c2t-96h bin/c2t.exe bin/c2t-96h.exe bin/c2t_x86 bin/c2t_arm bin/c2t-96h_x86 bin/c2t-96h_arm
