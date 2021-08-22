@@ -73,6 +73,8 @@ make clean
 make
 ```
 
+> For Linux read [build_notes.md](build_notes.md) for build tips.
+
 To build from Windows, first install MinGW (<http://www.mingw.org/>), then type from the root of this distribution:
 
 ```
