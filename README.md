@@ -59,7 +59,7 @@ sudo chmod 755 /usr/local/bin/c2t-96h /usr/local/bin/c2t
 
 Prerequisites:
 
-- `cl65` version 2.13.3 (<https://github.com/mrdudz/cc65-old/blob/master/cc65-sources-2.13.3.tar.bz2>)
+- `cl65` version 2.13.3 (<https://github.com/mrdudz/cc65-old/raw/master/cc65-sources-2.13.3.tar.bz2>)
 
 
 ```
