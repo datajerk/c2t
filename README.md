@@ -66,7 +66,7 @@ Prerequisites:
 git clone https://github.com/datajerk/c2t.git
 ```
 
-To build for MacOS or Linux:
+### (UNIX, Linix, BSD, MacOS (will not be univerasl), etc...)
 
 ```
 make clean
@@ -75,7 +75,16 @@ make
 
 > For Linux, read [ubuntu_notes.md](ubuntu_notes.md) for build tips.
 
-To build from Windows, first install MinGW (<http://www.mingw.org/>), then type from the root of this distribution:
+### Universal MacOS (x86_64/arm64)
+
+```
+make clean
+make macos
+```
+
+### Windows
+
+First install MinGW (<http://www.mingw.org/>), then type from the root of this distribution:
 
 ```
 PATH=C:\MinGW\bin;%PATH%
