@@ -84,7 +84,7 @@ make macos
 
 ### Windows
 
-First install MinGW (<http://www.mingw.org/>), then type from the root of this distribution:
+First install MinGW (<https://osdn.net/projects/mingw/>), then type from the root of this distribution:
 
 ```
 PATH=C:\MinGW\bin;%PATH%
@@ -161,7 +161,7 @@ Single load binaries will auto extract and execute.  Disk images will auto extra
 Automated testing is only supported on MacOS and requires the following:
 
 
-* Virtual ][ 10.0.1 (<http://http://www.virtualii.com/>)
+* Virtual ][ 10.0.1 (<http://www.virtualii.com/>)
 * Windows cross-compiling tools <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>
 * Docker Desktop for Mac (<https://hub.docker.com/editions/community/docker-ce-desktop-mac/>)
 
