@@ -39,15 +39,15 @@ You clearly do not understand the awesomeness of the Apple II, move along.
 
 Download <https://github.com/datajerk/c2t/archive/master.zip> and extract.
 
-Both the archive and the repo `bin` directory contain MacOS 64-bit (`c2t`) and Windows 32-bit (`c2t.exe`) binaries.  Just copy to any directory in your path.
-> MacOS users may need to adjust the permissions, e.g.:
+Both the archive and the repo `bin` directory contain macOS 64-bit (`c2t`) and Windows 32-bit (`c2t.exe`) binaries.  Just copy to any directory in your path.
+> macOS users may need to adjust the permissions, e.g.:
 >
 ```
 sudo cp bin/c2t bin/c2t-96h /usr/local/bin
 sudo chmod 755 /usr/local/bin/c2t-96h /usr/local/bin/c2t
 ```
 
-An alternative and perhaps simplier install for MacOS:
+An alternative and perhaps simplier install for macOS:
 
 ```
 sudo curl https://raw.githubusercontent.com/datajerk/c2t/master/bin/c2t-96h >/usr/local/bin/c2t-96h
@@ -66,7 +66,7 @@ Prerequisites:
 git clone https://github.com/datajerk/c2t.git
 ```
 
-### (UNIX, Linix, BSD, MacOS (will not be univerasl), etc...)
+### (UNIX, Linux, BSD, macOS (will not be universal), etc...)
 
 ```
 make clean
@@ -75,7 +75,7 @@ make
 
 > For Linux, read [ubuntu_notes.md](ubuntu_notes.md) for build tips.
 
-### Universal MacOS (x86_64/arm64)
+### Universal macOS (x86_64/arm64)
 
 ```
 make clean
@@ -91,14 +91,14 @@ PATH=C:\MinGW\bin;%PATH%
 gcc -Wall -Wno-unused-value -Wno-unused-function -Wno-misleading-indentation -I. -O3 -static -o c2t c2t.c
 ```
 
-To cross build for Windows from MacOS, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>, then type:
+To cross build for Windows from macOS, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>, then type:
 
 ```
 make clean
-make windows # or 'make dist' if you want both MacOS and Windows built
+make windows # or 'make dist' if you want both macOS and Windows built
 ```
 
-> If MacOS errors with _cannot be opened because the developer cannot be verified_ with the mingw32 gcc binaries, then type:
+> If macOS errors with _cannot be opened because the developer cannot be verified_ with the mingw32 gcc binaries, then type:
 > 
 ```
 sudo xattr -r -d com.apple.quarantine /usr/local/gcc-4.8.0-qt-4.8.4-for-mingw32
@@ -158,7 +158,7 @@ Single load binaries will auto extract and execute.  Disk images will auto extra
 
 ## Testing
 
-Automated testing is only supported on MacOS and requires the following:
+Automated testing is only supported on macOS and requires the following:
 
 
 * Virtual ][ 10.0.1 (<http://www.virtualii.com/>)
