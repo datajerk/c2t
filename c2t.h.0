@@ -50,7 +50,7 @@ Examples:\n\
         c2t -2f moon.patrol,801 moon.patrol.aif\n\
         c2t -2 hello,300 hello.aiff\n\
         c2t -1 hello.mon hello.wav\n\
-        c2t -2 thief,801 thief.obj,3ffd thief.pic,2000 theif.aif\n\
+        c2t -2 thief,801 thief.obj,3ffd thief.pic,2000 thief.aif\n\
         c2t foo.dsk foo.wav\n\
 \n\
 ";
