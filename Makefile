@@ -20,23 +20,23 @@ clean: testclean
 
 # nix
 bin/c2t: c2t.c c2t.h
-	gcc -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t c2t.c -lm
+	$(CC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t c2t.c -lm
 
 bin/c2t-96h: c2t-96h.c c2t.h
-	gcc -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t-96h c2t-96h.c -lm
+	$(CC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t-96h c2t-96h.c -lm
 
 # macos universal
 bin/c2t_x86: c2t.c c2t.h
-	gcc -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -target x86_64-apple-macos10.12 -o $@ c2t.c -lm
+	$(CC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -target x86_64-apple-macos10.12 -o $@ c2t.c -lm
 
 bin/c2t-96h_x86: c2t-96h.c c2t.h
-	gcc -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -target x86_64-apple-macos10.12 -o $@ c2t-96h.c -lm
+	$(CC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -target x86_64-apple-macos10.12 -o $@ c2t-96h.c -lm
 
 bin/c2t_arm: c2t.c c2t.h
-	gcc -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -target arm64-apple-macos11 -o $@ c2t.c -lm
+	$(CC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -target arm64-apple-macos11 -o $@ c2t.c -lm
 
 bin/c2t-96h_arm: c2t-96h.c c2t.h
-	gcc -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -target arm64-apple-macos11 -o $@ c2t-96h.c -lm
+	$(CC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -target arm64-apple-macos11 -o $@ c2t-96h.c -lm
 
 # windows
 bin/c2t.exe: c2t.c c2t.h
