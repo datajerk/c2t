@@ -76,3 +76,5 @@ cat mon/dos33.boot2.mon | \
 echo "};" >>c2t.h.2
 
 cat c2t.h.[012] > c2t.h
+
+rm -f c2t.h.[12]
