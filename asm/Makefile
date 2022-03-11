@@ -1,5 +1,5 @@
 CL = cl65
-CL_FLAGS = -t none --listing --list-bytes 100
+CL_FLAGS = -t none
 
 ASRC = $(shell echo *.s)
 AOBJ = $(ASRC:%.s=%.o)
