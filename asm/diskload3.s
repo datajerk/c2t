@@ -143,7 +143,7 @@ inflateFixedBlock_setCodeLengths:
 	cpy	#LENGTH_SYMBOLS
 	bcs	inflateFixedBlock_setControlCodeLength
 	cpy	#24
-	adc	#(2-DISTANCE_TREE) & $ff
+	adc	#<(2-DISTANCE_TREE)
 inflateFixedBlock_setControlCodeLength:
 	sta	controlSymbolCodeLength,y
 inflateFixedBlock_noControlSymbol:
@@ -348,7 +348,7 @@ buildHuffmanTree_noControlSymbol:
 	bne	buildHuffmanTree_countCodeLengths
 ; Calculate offsets of symbols sorted by code length
 ;	lda	#0
-	ldx	#(-3*TREE_SIZE) & $ff
+	ldx	#<(-3*TREE_SIZE)
 buildHuffmanTree_calculateOffsets:
 	sta	nBitCode_literalOffset+3*TREE_SIZE-$100,x
 ;;	add	nBitCode_literalCount+3*TREE_SIZE-$100,x
