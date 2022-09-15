@@ -228,7 +228,7 @@ int main(int argc, char **argv)
 
 	fprintf(stderr,"\n");
 	for(i=optind;i<argc-fileoutput;i++) {
-		char start[5];
+		char *start;
 		unsigned char b, *data;
 		int j, k, inputtype=BINARY;
 		segment *tmp;
@@ -242,18 +242,17 @@ int main(int argc, char **argv)
 
 		k=0;
 		for(j=0;j<strlen(argv[i]);j++) {
-			if(argv[i][j] == ',')
+			if(argv[i][j] == ',') {
+				j++; // skip over comma, if present
 				break;
+			}
 			segments[numseg].filename[k++]=argv[i][j];
 		}
 		segments[numseg].filename[k] = '\0';
 		// TODO: store as basename, check for MINGW compat
 
-		k=0;j++;
-		for(;j<strlen(argv[i]);j++)
-			start[k++]=argv[i][j];
-		start[k] = '\0';
-		if(k == 0)
+		start = &argv[i][j]; // points at the start address or at '\0' if no start address given
+		if(!*start)
 			segments[numseg].start = -1;
 		else
 			segments[numseg].start = (int)strtol(start, (char **)NULL, 16);
