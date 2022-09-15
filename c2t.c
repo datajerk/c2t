@@ -1422,7 +1422,7 @@ char *getext(char *filename)
 	if(sp == strlen(filename) || sp == 0)
 		return(NULL);
 
-	if((rval = (char *)malloc(sp * sizeof(char))) == NULL)
+	if((rval = (char *)malloc((1 + sp) * sizeof(char))) == NULL)
 		; //do error code
 
 	rval[sp] = '\0';

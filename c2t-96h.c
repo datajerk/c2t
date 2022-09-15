@@ -1561,7 +1561,7 @@ char *getext(char *filename)
 	if(sp == strlen(filename) || sp == 0)
 		return(NULL);
 
-	if((rval = (char *)malloc(sp * sizeof(char))) == NULL)
+	if((rval = (char *)malloc((sp + 1) * sizeof(char))) == NULL)
 		; //do error code
 
 	rval[sp] = '\0';
