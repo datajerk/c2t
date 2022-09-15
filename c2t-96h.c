@@ -319,6 +319,7 @@ int main(int argc, char **argv)
 			if(strcmp(ext,"PO") == 0)
 				inputtype = DSK;
 		}
+		free(ext);
 
 //TODO: Windows needs "rb", check UNIX/Linux
 
@@ -525,6 +526,7 @@ int main(int argc, char **argv)
 				return 1;
 			}
 		}
+		free(ext);
 	}
 	else {
 /*
@@ -1470,6 +1472,11 @@ int main(int argc, char **argv)
 		Write_WAVE(ofp,buf.sound,buf.length,rate,bits,amp);
 
 	fclose(ofp);
+	free(buf.sound);
+	for(i=0;i<numseg;i++) {
+		free(segments[i].data);
+	}
+	free(segments);
 	return 0;
 }
 

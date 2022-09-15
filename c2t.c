@@ -319,6 +319,7 @@ int main(int argc, char **argv)
 				fprintf(stderr,"Reading %s, type %s, segment %d, start: ",segments[numseg].filename,filetypes[inputtype],numseg+1);
 			}
 		}
+		free(ext);
 
 		if(inputtype == BINARY) {
 			if(segments[numseg].start == -1) {
@@ -436,6 +437,7 @@ int main(int argc, char **argv)
 				return 1;
 			}
 		}
+		free(ext);
 	}
 	else {
 /*
@@ -1352,6 +1354,11 @@ int main(int argc, char **argv)
 		Write_WAVE(ofp,output,outputlength,rate,bits,amp);
 
 	fclose(ofp);
+	free(output);
+	for(i=0;i<numseg;i++) {
+		free(segments[i].data);
+	}
+	free(segments);
 	return 0;
 }
 
