@@ -39,49 +39,69 @@ You clearly do not understand the awesomeness of the Apple II, move along.
 
 Download <https://github.com/datajerk/c2t/archive/master.zip> and extract.
 
-Both the archive and the repo `bin` directory contain OS/X 64-bit (`c2t`) and Windows 32-bit (`c2t.exe`) binaries.  Just copy to any directory in your path.
-> OS/X users may need to adjust the permissions, e.g.:
+Both the archive and the repo `bin` directory contain macOS 64-bit (`c2t`) and Windows 32-bit (`c2t.exe`) binaries.  Just copy to any directory in your path.
+> macOS users may need to adjust the permissions, e.g.:
+>
 ```
-cp bin/c2t /usr/local/bin
-cp bin/c2t-96h /usr/local/bin
-chmod 755 /usr/local/bin/c2t
-chmod 755 /usr/local/bin/c2t-96h
+sudo cp bin/c2t bin/c2t-96h /usr/local/bin
+sudo chmod 755 /usr/local/bin/c2t-96h /usr/local/bin/c2t
 ```
 
-An alternative and perhaps simplier install for OS/X:
+An alternative and perhaps simplier install for macOS:
+
 ```
 sudo curl https://raw.githubusercontent.com/datajerk/c2t/master/bin/c2t-96h >/usr/local/bin/c2t-96h
-sudo chmod 755 /usr/local/bin/c2t-96h
 sudo curl https://raw.githubusercontent.com/datajerk/c2t/master/bin/c2t >/usr/local/bin/c2t
-sudo chmod 755 /usr/local/bin/c2t
+sudo chmod 755 /usr/local/bin/c2t-96h /usr/local/bin/c2t
 ```
 
 ## Build from Source
 
 Prerequisites:
 
-- `cl65` version 2.13.3 (<https://github.com/mrdudz/cc65-old/blob/master/cc65-sources-2.13.3.tar.bz2>)
+- `cl65` version 2.13.3 (<https://github.com/mrdudz/cc65-old/raw/master/cc65-sources-2.13.3.tar.bz2>)
 
 
 ```
 git clone https://github.com/datajerk/c2t.git
 ```
-To build for OS/X or Linux:
+
+### (UNIX, Linux, BSD, macOS (will not be universal), etc...)
+
 ```
 make clean
 make
 ```
 
-To build from Windows, first install MinGW (<http://www.mingw.org/>), then type from the root of this distribution:
-```
-PATH=C:\MinGW\bin;%PATH%
-gcc -Wall -Wno-unused-value -Wno-unused-function -O3 -static -o c2t c2t.c
-```
+> For Linux, read [ubuntu_notes.md](ubuntu_notes.md) for build tips.
 
-To cross build for Windows from OS/X, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>, then type:
+### Universal macOS (x86_64/arm64)
+
 ```
 make clean
-make windows # or 'make dist' if you want both OS/X and Windows built
+make macos
+```
+
+### Windows
+
+First install MinGW (<https://osdn.net/projects/mingw/>), then type from the root of this distribution:
+
+```
+PATH=C:\MinGW\bin;%PATH%
+gcc -Wall -Wno-unused-value -Wno-unused-function -Wno-misleading-indentation -I. -O3 -static -o c2t c2t.c
+```
+
+To cross build for Windows from macOS, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>, then type:
+
+```
+make clean
+make windows # or 'make dist' if you want both macOS and Windows built
+```
+
+> If macOS errors with _cannot be opened because the developer cannot be verified_ with the mingw32 gcc binaries, then type:
+> 
+```
+sudo xattr -r -d com.apple.quarantine /usr/local/gcc-4.8.0-qt-4.8.4-for-mingw32
 ```
 
 
@@ -138,20 +158,29 @@ Single load binaries will auto extract and execute.  Disk images will auto extra
 
 ## Testing
 
-Automated testing is only supported on OS/X and requires the following:
+Automated testing is only supported on macOS and requires the following:
 
 
-* Virtual ][ 7.6 (<http://http://www.virtualii.com/>)
+* Virtual ][ 10.0.1 (<http://www.virtualii.com/>)
 * Windows cross-compiling tools <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>
-* Wine (<http://winehq.org>) installed in `~/wine` (extract the tarball in `~/wine` and move the contents of `~/wine/usr` to `~/wine`, or change the path to `wine` in `tests/test.sh`).
+* Docker Desktop for Mac (<https://hub.docker.com/editions/community/docker-ce-desktop-mac/>)
 
 > You can edit `tests/test.md` if you do not want to test Windows binaries or want to use different images for test.
 
+Build wine32 container (if testing Windows binaries):
+
+```
+# start docker first, make sure it is running
+docker build --no-cache -t wine32 -f Dockerfile.wine32 .
+```
+
 To test, type:
+
 ```
 make testclean # only once, unless you want to start over
 make test
 ```
+
 > If Virtual ][ crashes while testing, just `make test` again to restart failed test and continue where it left off.  Do not type `make testclean` again unless you want to start over.
 
 Example output: <https://youtu.be/FCOb4f2hYN8>

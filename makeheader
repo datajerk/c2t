@@ -5,7 +5,7 @@ header()
 	FILE=$1
 	VAR=$2
 	EOL=$3
-	BYTES=$(hexdump -v $FILE | sed 's/^.......//' | wc -w | awk '{print $1}');
+	BYTES=$(hexdump -ve '1/1 "%.2x "' $FILE | wc -w | awk '{print $1}');
 
 	echo "/*"
 	expand ${FILE}.s
@@ -13,7 +13,7 @@ header()
 
 	printf "unsigned char $VAR[] = {\n\t"
 	
-	for i in $(hexdump -v $FILE | sed 's/^.......//');
+	for i in $(hexdump -ve '1/1 "%.2x "' $FILE);
 	do
 		printf "0x%02X" 0x$i
 		BYTES=$((BYTES - 1))
@@ -76,3 +76,5 @@ cat mon/dos33.boot2.mon | \
 echo "};" >>c2t.h.2
 
 cat c2t.h.[012] > c2t.h
+
+rm -f c2t.h.[12]

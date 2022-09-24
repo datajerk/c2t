@@ -8,8 +8,8 @@ on run argv
 	set loadcmd to item 5 of argv
 	set my_timeout to item 6 of argv
 
-	-- tell application "Virtual ]["
-	tell application "/Applications/Virtual ][/7.6/Virtual ][.app"
+	tell application "Virtual ]["
+	-- tell application "/Applications/Virtual ][/7.6/Virtual ][.app"
 		activate
 		delay 1.5
 		-- Close all open machines
@@ -26,7 +26,7 @@ on run argv
 		end if
 		tell theMachine
 			-- Change to a color screen
-			-- set monochrome screen to false
+			set monochrome screen to false
 			set scanlines to true
 			set speaker volume to 0.25
 			if dsk = "1" then
