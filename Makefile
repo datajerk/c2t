@@ -15,7 +15,7 @@ macos: bin/c2t_x86 bin/c2t_arm bin/c2t-96h_x86 bin/c2t-96h_arm
 dist: macos windows
 
 clean: testclean
-	rm -f c2t.h bin/c2t bin/c2t-96h bin/c2t.exe bin/c2t-96h.exe bin/c2t_x86 bin/c2t_arm bin/c2t-96h_x86 bin/c2t-96h_arm
+	rm -f c2t.h bin/c2t bin/c2t-96h bin/c2t.exe bin/c2t-96h.exe bin/c2t_x86 bin/c2t_arm bin/c2t-96h_x86 bin/c2t-96h_arm bin/c2mc_arm
 	cd asm; make clean
 
 # nix
@@ -38,6 +38,9 @@ bin/c2t_arm: c2t.c c2t.h
 bin/c2t-96h_arm: c2t-96h.c c2t.h
 	$(CC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -target arm64-apple-macos11 -o $@ c2t-96h.c -lm
 
+bin/%_arm: %.c %.h
+	$(CC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -target arm64-apple-macos11 -o $@ $< -lm
+	
 # windows
 bin/c2t.exe: c2t.c c2t.h
 	$(WIN32GCC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t.exe c2t.c

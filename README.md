@@ -1,3 +1,10 @@
+## This Fork
+`c2mc` is a command line tool that can convert .c10 binary code/data into audio files suitable for use with the Radio Shack TRS-80 Model MC-10 cassette interface. No frills yet. I have only tested with macOS arm64:
+```
+make clean
+make bin/c2mc_arm
+```
+
 ## Introduction
 
 `c2t` is a command line tool that can convert binary code/data and/or Apple-1/II Monitor text, as well as 140K disk images, into audio files suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
