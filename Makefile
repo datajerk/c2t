@@ -15,7 +15,7 @@ macos: bin/c2t_x86 bin/c2t_arm bin/c2t-96h_x86 bin/c2t-96h_arm
 dist: macos windows
 
 clean: testclean
-	rm -f c2t.h bin/c2t bin/c2t-96h bin/c2t.exe bin/c2t-96h.exe bin/c2t_x86 bin/c2t_arm bin/c2t-96h_x86 bin/c2t-96h_arm
+	rm -rf c2t.h bin/c2t bin/c2t-96h bin/c2t.exe bin/c2t-96h.exe bin/c2t_x86 bin/c2t_arm bin/c2t-96h_x86 bin/c2t-96h_arm cc65-sources-2.13.3.tar.bz2 cc65-2.13.3
 	cd asm; make clean
 
 # nix
@@ -45,7 +45,14 @@ bin/c2t.exe: c2t.c c2t.h
 bin/c2t-96h.exe: c2t-96h.c c2t.h
 	$(WIN32GCC) -Wall -Wno-strict-aliasing -Wno-unused-value -Wno-unused-function -I. -O3 -o bin/c2t-96h.exe c2t-96h.c
 
-c2t.h: c2t.h.0 makeheader mon/dos33.boot1.mon mon/dos33.boot2.mon asm/autoload.s asm/diskload2.s asm/diskload3.s asm/diskload8000.s asm/diskload9600.s asm/fastload8000.s asm/fastload9600.s asm/fastloadcd.s asm/inflate.s
+cc65-sources-2.13.3.tar.bz2:
+	curl -sLO https://github.com/mrdudz/cc65-old/raw/master/cc65-sources-2.13.3.tar.bz2
+
+cc65-2.13.3/bin/cl65: cc65-sources-2.13.3.tar.bz2
+	tar zxf cc65-sources-2.13.3.tar.bz2
+	(cd cc65-2.13.3; /usr/bin/sed 's!/usr/local!'${PWD}'/cc65-2.13.3!' <make/gcc.mak >Makefile; make -j4 bins || make bins && make install || true)
+
+c2t.h: c2t.h.0 makeheader mon/dos33.boot1.mon mon/dos33.boot2.mon asm/autoload.s asm/diskload2.s asm/diskload3.s asm/diskload8000.s asm/diskload9600.s asm/fastload8000.s asm/fastload9600.s asm/fastloadcd.s asm/inflate.s cc65-2.13.3/bin/cl65
 	./makeheader
 
 test: bin/c2t-96h bin/c2t-96h.exe tests/test.md

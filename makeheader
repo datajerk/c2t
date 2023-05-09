@@ -4,37 +4,13 @@ header()
 {
 	FILE=$1
 	VAR=$2
-	EOL=$3
-	BYTES=$(hexdump -ve '1/1 "%.2x "' $FILE | wc -w | awk '{print $1}');
 
-	echo "/*"
-	expand ${FILE}.s
-	echo "*/"
-
-	printf "unsigned char $VAR[] = {\n\t"
-	
-	for i in $(hexdump -ve '1/1 "%.2x "' $FILE);
-	do
-		printf "0x%02X" 0x$i
-		BYTES=$((BYTES - 1))
-		if ((BYTES != 0))
-		then
-			printf ","
-		fi
-		EOL=$((EOL - 1))
-		if ((EOL == 0))
-		then
-			EOL=8
-			printf "\n\t"
-		fi
-	done
-
-	printf "\n};\n"
+	/usr/bin/xxd -i ${FILE} | sed 's/'${FILE}'/'${VAR}'/'
 }
 
 cd asm
 make clean
-make
+PATH=../cc65-2.13.3/bin:$PATH make
 
 (
 header autoload autoloadcode 4
