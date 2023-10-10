@@ -2,13 +2,13 @@
 
 `c2t` is a command line tool that can convert binary code/data and/or Apple-1/II Monitor text, as well as 140K disk images, into audio files suitable for use with the Apple-1 and II (II, II+, //e) cassette interface.
 
-`c2t` offers three high-speed options for the 64K Apple II, II+, and //e: 8000 bps, 8820 bps, and 9600 bps.  The `c2t` compression option may be used to speedup the delivery of data with all three as well as the native 1333 bps cassette interface ROM routines.
+`c2t` offers three high-speed options for the 64K Apple II, II+, and //e: 8000 bps, 8820 bps, and 9600 bps.  The `c2t` compression option may be used to speed up the delivery of data with all three as well as the native 1333 bps cassette interface ROM routines.
 
 8820 bps (used to burn CDs) and 9600 bps are not compatible with all II+s and //es.  If you plan to distribute your audio files, then use 8000 bps.
 
 > 8820 bps and 1333 bps is not an option for disk images.
 
-High-speed and compression options require `c2t`'s custom loader, and at this time that limits you to a single segment.  You can overcome this limitation by concatenating all your code together and creating your own code to shuffle your data around, or, pad each segment with enough zeros to align  subsequent segments with their target address and then use the compress option to minimize this overhead.
+High-speed and compression options require `c2t`'s custom loader, and at this time that limits you to a single segment.  You can overcome this limitation by concatenating all your code together and creating your own code to shuffle your data around, or pad each segment with enough zeros to align subsequent segments with their target addresses and then use the compress option to minimize this overhead.
 
 Multi-segment audio files can be created for the Apple-1, II, II+, and //e that can be loaded using the standard cassette interface ROM routines.
 
@@ -66,7 +66,7 @@ Prerequisites:
 git clone https://github.com/datajerk/c2t.git
 ```
 
-### (UNIX, Linux, BSD, macOS (will not be universal), etc...)
+### (UNIX, Linux, BSD, macOS (will not be universal), etc.)
 
 ```
 make clean
@@ -118,7 +118,7 @@ Read <https://github.com/datajerk/c2t/raw/master/article/article.pdf> for detail
 
 ## Quick Start
 
-To create an audio file that can auto extract to disk type:
+To create an audio file that can auto extract to disk, type:
 
 `c2t-96h diskimage.dsk audiofilename.aif` or use `.wav`.
 
@@ -126,21 +126,21 @@ To create an audio file that can auto extract to disk type:
 
 > The disk image must be exactly 143360 bytes (140K).  800K disks are not supported.
 
-> Use the `-n` option, e.g. `c2t-96h -n diskimage.dsk audiofilename.aif` if the disk ][ is emulated (e.g. CFFA3000, SDISK //, etc...)
+> Use the `-n` option, e.g. `c2t-96h -n diskimage.dsk audiofilename.aif` if the disk ][ is emulated (e.g. CFFA3000, SDISK //, etc.)
 
-To create an audio file for a single load binary than can auto extract and execute type:
+To create an audio file for a single load binary that can auto extract and execute, type:
 
 `c2t-96h -2bc8 super_puckman,800 audiofilename.wav` or use `.aif`.
 
 > The input image must be an Apple II binary with or without a 4-byte header.  The 4-byte header is the standard DOS header that defines the binary size and memory location.  Depending on how you extracted the single load binary you may or may not have this header.  If this header is missing you'll have to append to the binary name `,memorylocation` e.g. `,800`.
 
-> A *Single Load Binary* is defined as a self contained executable that has no disk dependancies (e.g. data, overlays, game save data, high scores, etc...).  The binary must be 100% stateless or it will fail to function properly.  <http://asciiexpress.net/gameserver> has many examples.
+> A *Single Load Binary* is defined as a self contained executable that has no disk dependencies (e.g. data, overlays, game save data, high scores, etc.).  The binary must be 100% stateless or it will fail to function properly.  <http://asciiexpress.net/gameserver> has many examples.
 
-In both cases you'll have a `.aif` or `.wav` formatted audio file.  It is critical that they file not be compress to MP3 or other format.  Read <https://github.com/datajerk/c2t/raw/master/article/article.pdf> for details.
+In both cases you'll have a `.aif` or `.wav` formatted audio file.  It is critical that the file not be compressed to MP3 or other lossy compression format.  Read <https://github.com/datajerk/c2t/raw/master/article/article.pdf> for details.
 
 To load up your disk or binary to a physical Apple //e or ][+:
 
-* Connect an audio patch code from your phone, tablet, computer, etc... to the cassette-in port of the Apple II.
+* Connect an audio patch cable from your phone, tablet, computer, etc. to the cassette-in port of the Apple II.
 	
 	> I just use Dropbox to quickly get these audio files to my iPhone.  I also play them from the Dropbox app.
 	
@@ -151,7 +151,7 @@ To load up your disk or binary to a physical Apple //e or ][+:
 	* *Optionally* insert a blank disk if loading a disk image
 	* At the `]` prompt type `LOAD` and press *RETURN*
 
-* From your phone, tablet, computer *play* the audio file
+* From your phone, tablet, computer, etc., *play* the audio file
 
 Single load binaries will auto extract and execute.  Disk images will auto extract and expand to disk.
 
@@ -188,7 +188,7 @@ Example output: <https://youtu.be/FCOb4f2hYN8>
 
 ## Tested disk ][ Configurations
 
-> Most, if not all, disk ][ emulators (e.g. CFFA3000, SDISK //, etc...) do not support formatting.  The `-n` option must be used for testing in these cases.
+> Most, if not all, disk ][ emulators (e.g. CFFA3000, SDISK //, etc.) do not support formatting.  The `-n` option must be used for testing in these cases.
 
 The following configurations have been tested:
 
