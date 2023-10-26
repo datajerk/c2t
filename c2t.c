@@ -105,7 +105,7 @@ Bugs:
 	} \
 }
 
-void usage();
+void usage(void);
 char *getext(char *filename);
 void appendtone(double **sound, long *length, int freq, int rate, double time, double cycles, int *offset);
 void Write_AIFF(FILE * fptr, double *samples, long nsamples, int nfreq, int bits, double amp);
@@ -1433,7 +1433,7 @@ char *getext(char *filename)
 	return(rval);
 }
 
-void usage()
+void usage(void)
 {
 	fprintf(stderr,"%s",usagetext);
 }

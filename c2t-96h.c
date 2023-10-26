@@ -119,7 +119,7 @@ typedef struct outbuf {
 	int rate;
 } outbuf;
 
-void usage();
+void usage(void);
 char *getext(char *filename);
 void outbuf_init(outbuf *buf, int rate);
 void appendtone(outbuf *buf, int freq, double time, double cycles);
@@ -1572,7 +1572,7 @@ char *getext(char *filename)
 	return(rval);
 }
 
-void usage()
+void usage(void)
 {
 	fprintf(stderr,"%s",usagetext);
 }
