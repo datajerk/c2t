@@ -1,6 +1,5 @@
 
 WIN32GCC = /usr/local/gcc-4.8.0-qt-4.8.4-for-mingw32/win32-gcc/bin/i586-mingw32-gcc
-export SDKROOT = $(shell xcrun --sdk macosx --show-sdk-path)
 
 all: nix
 
@@ -9,6 +8,7 @@ nix: bin/c2t bin/c2t-96h
 windows: bin/c2t.exe bin/c2t-96h.exe
 
 macos: bin/c2t_x86 bin/c2t_arm bin/c2t-96h_x86 bin/c2t-96h_arm
+	SDKROOT=$(shell xcrun --sdk macosx --show-sdk-path)
 	lipo -create -output bin/c2t bin/c2t_x86 bin/c2t_arm
 	lipo -create -output bin/c2t-96h bin/c2t-96h_x86 bin/c2t-96h_arm
 
