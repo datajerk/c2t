@@ -91,7 +91,7 @@ PATH=C:\MinGW\bin;%PATH%
 gcc -Wall -Wno-unused-value -Wno-unused-function -Wno-misleading-indentation -I. -O3 -static -o c2t c2t.c
 ```
 
-To cross build for Windows from macOS, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>, then type:
+To cross build for Windows from macOS, first install <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg> (alt: <https://web.archive.org/web/20140810060434/http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>), then type:
 
 ```
 make clean
