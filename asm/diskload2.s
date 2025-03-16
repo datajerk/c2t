@@ -62,7 +62,7 @@ move1:
 	lda	boot1o,x
 	sta	boot1,x
 	inx
-	cpx	#$48
+	cpx	#48
 	bne	move1		; branch on positive (0-127)
 patch:
 	lda	#$B3		; hack since chksum could not be written to C000

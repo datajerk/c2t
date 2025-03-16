@@ -158,10 +158,11 @@ Single load binaries will auto extract and execute.  Disk images will auto extra
 
 ## Testing
 
+> Windows binary testing fails on Apple Silicon Macs (cannot run 32-bit code with Rosetta 2 enabled in Docker).  Disable Rosetta 2 Docker support.
+
 Automated testing is only supported on macOS and requires the following:
 
-
-* Virtual ][ 10.0.1 (<http://www.virtualii.com/>)
+* Virtual ][ 12.1.1 (<http://www.virtualii.com/>)
 * Windows cross-compiling tools <http://crossgcc.rts-software.org/download/gcc-4.8.0-qt-4.8.4-win32/gcc-4.8.0-qt-4.8.4-for-mingw32.dmg>
 * Docker Desktop for Mac (<https://hub.docker.com/editions/community/docker-ce-desktop-mac/>)
 
@@ -171,7 +172,7 @@ Build wine32 container (if testing Windows binaries):
 
 ```
 # start docker first, make sure it is running
-docker build --no-cache -t wine32 -f Dockerfile.wine32 .
+docker build --platform linux/amd64 --no-cache -t wine32 -f Dockerfile.wine32 .
 ```
 
 To test, type:

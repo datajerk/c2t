@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run --rm -it -v $PWD/..:/pwd wine32 bash -c "cd /pwd/tests && wine $*"
+docker run --platform linux/amd64 --rm -it -v $PWD/..:/pwd wine32 bash -c "cd /pwd/tests && wine $*"

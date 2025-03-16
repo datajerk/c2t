@@ -1,5 +1,6 @@
-# docker build --no-cache -t wine32 -f Dockerfile.wine32 .
-FROM ubuntu:19.10
+# docker build --platform linux/amd64 --no-cache -t wine32 -f Dockerfile.wine32 .
+#FROM ubuntu:19.10
+FROM ubuntu:24.04
 
 ENV LC_CTYPE C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
